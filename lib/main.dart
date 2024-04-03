@@ -6,7 +6,8 @@ void main() async {
     runApp(MaterialApp(
         home: const Main(),
         theme: ThemeData(
-            scaffoldBackgroundColor: AppColor.backgroundColor
+            scaffoldBackgroundColor: AppColor.backgroundColor,
+            hintColor: AppColor.primaryColor
         )
     ));
 }
