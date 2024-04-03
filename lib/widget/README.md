@@ -1,0 +1,1 @@
+Widgets serão os componentes da aplicação, que podem ser reutilizados em várias partes do projeto. Semelhante a um componente em React, por exemplo.

@@ -1,0 +1,1 @@
+O controller é a camada que atua como um intermediário entre a View (a interface) e o Model (os dados). Ele manipula a entrada do usuario, interage com o model para recuperar/atualizar dados e atualiza a view com estes dados

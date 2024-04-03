@@ -1,0 +1,1 @@
+O Model é a camada que lida com a lógica de negócios e os dados. Ele representa os dados e a s regras que governam o acesso a esses dados.

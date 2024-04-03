@@ -1,0 +1,1 @@
+Esta pasta será responsável pelas páginas que exibem as informações para o usuário. Nela não conterá nenhuma lógica de negócio, apenas a tela de exibição de informações.
