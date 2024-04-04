@@ -7,8 +7,11 @@ class FormTextField extends StatefulWidget {
       this.keyboardType = TextInputType.text,
       this.hintText = "",
       required this.labelText,
-      required this.controller});
+      required this.controller,
+      this.passwordField = false,
+      });
 
+  final bool passwordField;
   final TextInputType keyboardType;
   final String hintText;
   final String labelText;
@@ -24,6 +27,10 @@ class _FormTextFieldState extends State<FormTextField> {
     return TextFormField(
       keyboardType: widget.keyboardType,
       style: const TextStyle(color: AppColor.textColor),
+      
+      obscureText: widget.passwordField,
+      enableSuggestions: !widget.passwordField,
+      autocorrect: !widget.passwordField,
 
       decoration: InputDecoration(
         hintText: widget.hintText,
