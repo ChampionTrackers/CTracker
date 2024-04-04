@@ -3,16 +3,20 @@ import 'package:ctracker/widget/form_text_field.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class ViewLogin extends StatefulWidget {
-  const ViewLogin({super.key});
+class ViewSignin extends StatefulWidget {
+  const ViewSignin({super.key});
 
   @override
-  State<ViewLogin> createState() => _ViewLoginState();
+  State<ViewSignin> createState() => _ViewSigninState();
 }
 
-class _ViewLoginState extends State<ViewLogin> {
+class _ViewSigninState extends State<ViewSignin> {
+  final usernameInputController = TextEditingController();
   final emailInputController = TextEditingController();
   final passwordInputController = TextEditingController();
+  final confirmPasswordInputController = TextEditingController();
+
+  bool termsCheckbox = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -43,7 +47,7 @@ class _ViewLoginState extends State<ViewLogin> {
                 height: 50,
               ),
               const Text(
-                "Logar-se no Champions Tracker",
+                "Cadastre-se no Champions Tracker",
                 style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
@@ -74,6 +78,14 @@ class _ViewLoginState extends State<ViewLogin> {
                 height: 20,
               ),
               FormTextField(
+                keyboardType: TextInputType.text,
+                labelText: "Username",
+                controller: usernameInputController,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              FormTextField(
                 keyboardType: TextInputType.emailAddress,
                 labelText: "Email",
                 controller: emailInputController,
@@ -90,17 +102,43 @@ class _ViewLoginState extends State<ViewLogin> {
               const SizedBox(
                 height: 20,
               ),
+              FormTextField(
+                keyboardType: TextInputType.text,
+                labelText: "Confirme sua Senha",
+                controller: confirmPasswordInputController,
+                passwordField: true,
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              CheckboxListTile(
+                title: const Text(
+                  "Aceito os termos de uso",
+                  style: TextStyle(color: AppColor.textColor),
+                ),
+                value: termsCheckbox,
+                onChanged: (value) {
+                  setState(() {
+                    termsCheckbox = !termsCheckbox;
+                  });
+                },
+                activeColor: AppColor.accentColor,
+                controlAffinity: ListTileControlAffinity.leading,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                   onPressed: _validarForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.primaryColor,
-                    foregroundColor: AppColor.textColor,
-                    shape: RoundedRectangleBorder(
+                      backgroundColor: AppColor.primaryColor,
+                      foregroundColor: AppColor.textColor,
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: const EdgeInsets.only(left: 70, right: 70, top: 20, bottom: 20)
-                  ),
-                  child: const Text("LOGAR")),
+                      ),
+                      padding: const EdgeInsets.only(
+                          left: 70, right: 70, top: 20, bottom: 20)),
+                  child: const Text("CRIAR UMA CONTA")),
             ],
           ),
         ),
