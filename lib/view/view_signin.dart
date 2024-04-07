@@ -2,6 +2,7 @@ import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/widget/form_text_field.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ctracker/components/oauth.dart';
 
 class ViewSignin extends StatefulWidget {
   const ViewSignin({super.key});
@@ -19,6 +20,8 @@ class _ViewSigninState extends State<ViewSignin> {
   bool termsCheckbox = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  // bool firstvalue = false; //Valor iniciado na checkbox
 
   void _validarForm() {
     if (_formKey.currentState!.validate()) {
@@ -47,33 +50,58 @@ class _ViewSigninState extends State<ViewSignin> {
                 height: 50,
               ),
               const Text(
-                "Cadastre-se no Champions Tracker",
+                "Cadastre-se\n no Champions Tracker\n",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                     color: AppColor.textColor),
               ),
-              // Row(
-              //   children: <Widget>[
-              //     Expanded(
-              //       child: Container(
-              //           margin: const EdgeInsets.only(right: 25.0),
-              //           child: const Divider(
-              //             color: AppColor.secondaryColor,
-              //             height: 36,
-              //           )),
-              //     ),
-              //     const Text("ou", style: TextStyle(color: AppColor.textColor)),
-              //     Expanded(
-              //       child: Container(
-              //           margin: const EdgeInsets.only(left: 25.0),
-              //           child: const Divider(
-              //             color: AppColor.secondaryColor,
-              //             height: 36,
-              //           )),
-              //     ),
-              //   ],
-              // ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                          OAuth( 
+              imagePath: 'lib/images/discordlogo.png', //OAuth Discord
+              borderColor: Color.fromRGBO(88, 101, 242, 1), 
+              containerColor: Color.fromRGBO(88, 101, 242, 1), 
+            ),
+              SizedBox(width: 35),
+                          OAuth( 
+              imagePath: 'lib/images/twitterlogo.png', //OAuth Twitter
+              borderColor: Color.fromRGBO(29, 161, 242, 1), 
+              containerColor: Color.fromRGBO(29, 161, 242, 20), 
+            ),
+              SizedBox(width: 35),
+                          OAuth( 
+              imagePath: 'lib/images/googlelogo.png', //OAuth Google
+              borderColor: Colors.white, 
+              containerColor: Colors.white, 
+            ), 
+              ]
+              ),
+             const SizedBox(height: 25),
+               Row(
+                 children: <Widget>[
+                   Expanded(
+                     child: Container(
+                         margin: const EdgeInsets.only(right: 25.0),
+                         child: const Divider(
+                           color: AppColor.secondaryColor,
+                          height: 36,
+                         )),
+                   ),
+                   const Text("ou", style: TextStyle(color: AppColor.textColor)),
+                   Expanded(
+                     child: Container(
+                         margin: const EdgeInsets.only(left: 25.0),
+                         child: const Divider(
+                           color: AppColor.secondaryColor,
+                           height: 36,
+                         )),
+                   ),
+                 ],
+               ),
               const SizedBox(
                 height: 20,
               ),
@@ -81,6 +109,7 @@ class _ViewSigninState extends State<ViewSignin> {
                 keyboardType: TextInputType.text,
                 labelText: "Username",
                 controller: usernameInputController,
+                hintText: "ChampionMaster",
               ),
               const SizedBox(
                 height: 20,
@@ -89,6 +118,7 @@ class _ViewSigninState extends State<ViewSignin> {
                 keyboardType: TextInputType.emailAddress,
                 labelText: "Email",
                 controller: emailInputController,
+                hintText: "champion@email.com",
               ),
               const SizedBox(
                 height: 20,
@@ -97,6 +127,7 @@ class _ViewSigninState extends State<ViewSignin> {
                 keyboardType: TextInputType.text,
                 labelText: "Senha",
                 controller: passwordInputController,
+                hintText: "Digite sua senha",
                 passwordField: true,
               ),
               const SizedBox(
@@ -106,11 +137,31 @@ class _ViewSigninState extends State<ViewSignin> {
                 keyboardType: TextInputType.text,
                 labelText: "Confirme sua Senha",
                 controller: confirmPasswordInputController,
+                hintText: "Digite a sua senha novamente",
                 passwordField: true,
               ),
               const SizedBox(
-                height: 60,
+                height: 40,
               ),
+              //  Row(  //checkbox centralizado 
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //    children: [
+              //      Checkbox(value: firstvalue,
+              //      activeColor: AppColor.accentColor,
+              //       onChanged: (value) {
+              //          setState(() {
+              //            firstvalue = value!;
+              //          });
+              //       }),
+                   
+              //       const Text(
+              //        "Aceito os termos de uso",
+              //       style: TextStyle(
+              //        color: AppColor.textColor,
+              //         ),
+              //       )
+              //    ],
+              // ),
               CheckboxListTile(
                 title: const Text(
                   "Aceito os termos de uso",
