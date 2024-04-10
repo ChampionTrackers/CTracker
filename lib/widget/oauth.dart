@@ -15,7 +15,7 @@ class OAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         border: Border.all(color: borderColor),
         borderRadius: BorderRadius.circular(10),
@@ -23,7 +23,7 @@ class OAuth extends StatelessWidget {
       ),
       child: Image.asset(
         imagePath,
-        height: 25,),
+        height: 18,),
     );
   }
 }

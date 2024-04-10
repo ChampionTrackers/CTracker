@@ -2,7 +2,8 @@ import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/widget/form_text_field.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ctracker/components/oauth.dart';
+import 'package:ctracker/widget/oauth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewLogin extends StatefulWidget {
   const ViewLogin({super.key});
@@ -44,7 +45,7 @@ class _ViewLoginState extends State<ViewLogin> {
                 height: 50,
               ),
               const Text(
-                "Logar-se\n no Champions Tracker\n",
+                "Logar-se no\n Champions Tracker\n",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24.0,
@@ -56,19 +57,19 @@ class _ViewLoginState extends State<ViewLogin> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                           OAuth( 
-              imagePath: 'lib/images/discordlogo.png', //OAuth Discord
+              imagePath: 'assets/images/discordlogo.png', //OAuth Discord
               borderColor: Color.fromRGBO(88, 101, 242, 1), 
               containerColor: Color.fromRGBO(88, 101, 242, 1), 
             ),
               SizedBox(width: 35),
                           OAuth( 
-              imagePath: 'lib/images/twitterlogo.png', //OAuth Twitter
+              imagePath: 'assets/images/twitterlogo.png', //OAuth Twitter
               borderColor: Color.fromRGBO(29, 161, 242, 1), 
               containerColor: Color.fromRGBO(29, 161, 242, 20), 
             ),
               SizedBox(width: 35),
                           OAuth( 
-              imagePath: 'lib/images/googlelogo.png', //OAuth Google
+              imagePath: 'assets/images/googlelogo.png', //OAuth Google
               borderColor: Colors.white, 
               containerColor: Colors.white, 
             ), 
@@ -113,6 +114,16 @@ class _ViewLoginState extends State<ViewLogin> {
                 controller: passwordInputController,
                 passwordField: true,
               ),
+                const Center(
+          child: Text(
+            'Esqueceu sua senha?',
+            style: TextStyle(
+              fontSize: 11,
+              color: AppColor.accentColor)
+              )),
+              const SizedBox(
+                height: 20,
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -127,6 +138,36 @@ class _ViewLoginState extends State<ViewLogin> {
                     padding: const EdgeInsets.only(left: 70, right: 70, top: 20, bottom: 20)
                   ),
                   child: const Text("LOGAR")),
+                  const SizedBox(
+                height: 20,
+              ),
+                  Center(
+                child: RichText(
+            text: const TextSpan(
+              children: [
+                TextSpan(
+                  text: 'Não tem uma conta?',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: AppColor.secondaryColor,
+                  ),
+                ),
+                 TextSpan(
+                  text: ' Criar agora',
+                  // recognizer: TapGestureRecognizer()..onTap = () async { 
+                  // Navigator.pushNamed(context, '/signin');
+                  // },
+                  // o código acima não vai funcionar a não ser que o "const" do textspan seja removido (nao sei pq)
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: AppColor.accentColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ] 
+            )
+            )
+              ),
             ],
           ),
         ),
