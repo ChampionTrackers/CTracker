@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tutorial_ct/constants/colors.dart';
-import 'package:tutorial_ct/items.dart';
+import 'package:ctracker/constants/colors.dart';
+import 'package:ctracker/items.dart';
 
 void main() => runApp(MyApp());
 

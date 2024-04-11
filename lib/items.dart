@@ -3,7 +3,7 @@ List items = [
     "descrição":
         "O CTracker é um app perfeito para você acompanhar de pertinho os seus campeonatos amadores favoritos.",
     "image": 
-        "assets/images/trofeu.png",
+        "assets/images/Trofeu.png",
   },
   {
     "descrição":
