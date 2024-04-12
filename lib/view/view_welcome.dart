@@ -2,25 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/items.dart';
 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class ViewWelcome extends StatefulWidget {
+  const ViewWelcome({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Welcome Screen',
-      home: WelcomeScreen(),
-    );
-  }
+  State<ViewWelcome> createState() => _ViewWelcomeState();
 }
 
-class WelcomeScreen extends StatefulWidget {
-  @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _ViewWelcomeState extends State<ViewWelcome> {
   late PageController _pageController;
   double currentPage = 0.0;
 
@@ -44,7 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   List<Widget> slides = items
       .map(
         (item) => Container(
-          padding: EdgeInsets.symmetric(horizontal: 18.0),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Column(
             children: <Widget>[
               Flexible(
@@ -57,17 +47,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   alignment: Alignment.bottomCenter,
                 ),
               ),
-              SizedBox(height: 30.0), // Adiciona espaçamento de 20.0 entre a imagem e a descrição
+              const SizedBox(height: 30.0), // Adiciona espaçamento de 20.0 entre a imagem e a descrição
               Flexible(
                 flex: 1,
                 fit: FlexFit.tight,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Column(
                     children: <Widget>[
                       Text(
                         item['descrição'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColor.textColor,
                           letterSpacing: 1.2,
                           fontSize: 16.0,
@@ -88,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   List<Widget> indicator() => List<Widget>.generate(
         slides.length,
         (index) => Container(
-          margin: EdgeInsets.symmetric(horizontal: 3.0),
+          margin: const EdgeInsets.symmetric(horizontal: 3.0),
           height: 10.0,
           width: 10.0,
           decoration: BoxDecoration(
@@ -118,11 +108,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 200.0),
+                  margin: const EdgeInsets.only(bottom: 200.0),
                   child: ElevatedButton(
                     onPressed: () {
                       // Ação do botão na última página
-                      print('Botão na última página pressionado');
+                      // print('Botão na última página pressionado');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primaryColor, // Cor de fundo do botão
@@ -131,7 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         borderRadius: BorderRadius.circular(20.0), // Borda do botão
                       ),
                     ),
-                    child: Padding(
+                    child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                       child: Text(
                         'Continuar',
@@ -144,8 +134,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.only(top: 70.0),
-                padding: EdgeInsets.symmetric(vertical: 40.0),
+                margin: const EdgeInsets.only(top: 70.0),
+                padding: const EdgeInsets.symmetric(vertical: 40.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: indicator(),
