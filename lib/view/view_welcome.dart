@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
-import 'package:ctracker/items.dart';
-
+import 'package:ctracker/constants/texts.dart';
 
 class ViewWelcome extends StatefulWidget {
   const ViewWelcome({super.key});
@@ -31,7 +30,7 @@ class _ViewWelcomeState extends State<ViewWelcome> {
     super.dispose();
   }
 
-  List<Widget> slides = items
+  List<Widget> slides = AppTexts.welcomeItems
       .map(
         (item) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -47,7 +46,9 @@ class _ViewWelcomeState extends State<ViewWelcome> {
                   alignment: Alignment.bottomCenter,
                 ),
               ),
-              const SizedBox(height: 30.0), // Adiciona espaçamento de 20.0 entre a imagem e a descrição
+              const SizedBox(
+                  height:
+                      30.0), // Adiciona espaçamento de 20.0 entre a imagem e a descrição
               Flexible(
                 flex: 1,
                 fit: FlexFit.tight,
@@ -93,57 +94,58 @@ class _ViewWelcomeState extends State<ViewWelcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: AppColor.backgroundColor,
-        child: Stack(
-          children: <Widget>[
-            PageView.builder(
-              controller: _pageController,
-              itemCount: slides.length,
-              itemBuilder: (BuildContext context, int index) {
-                return slides[index];
-              },
-            ),
-            if (currentPage.round() == slides.length - 1) // Verifica se está na última página
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 200.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Ação do botão na última página
-                      // print('Botão na última página pressionado');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.primaryColor, // Cor de fundo do botão
-                      foregroundColor: Colors.white, // Cor do texto do botão
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0), // Borda do botão
-                      ),
+      body: Stack(
+        children: <Widget>[
+          PageView.builder(
+            controller: _pageController,
+            itemCount: slides.length,
+            itemBuilder: (BuildContext context, int index) {
+              return slides[index];
+            },
+          ),
+          if (currentPage.round() ==
+              slides.length - 1) // Verifica se está na última página
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 200.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Ação do botão na última página
+                    // print('Botão na última página pressionado');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        AppColor.primaryColor, // Cor de fundo do botão
+                    foregroundColor: Colors.white, // Cor do texto do botão
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                        BorderRadius.circular(20.0), // Borda do botão
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                      child: Text(
-                        'Continuar',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
+                  ),
+                  child: const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    child: Text(
+                      'Continuar',
+                      style: TextStyle(fontSize: 16.0),
                     ),
                   ),
                 ),
               ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                margin: const EdgeInsets.only(top: 70.0),
-                padding: const EdgeInsets.symmetric(vertical: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: indicator(),
-                ),
+            ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.only(top: 70.0),
+              padding: const EdgeInsets.symmetric(vertical: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: indicator(),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
