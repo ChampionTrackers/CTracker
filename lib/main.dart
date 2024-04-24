@@ -1,4 +1,3 @@
-import 'package:ctracker/view/view_login.dart';
 import 'package:ctracker/view/view_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
