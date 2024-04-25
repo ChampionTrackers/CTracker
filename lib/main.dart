@@ -1,3 +1,4 @@
+import 'package:ctracker/view/view_login.dart';
 import 'package:ctracker/view/view_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
@@ -17,8 +18,8 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ViewSignin(),
+    return Scaffold(
+      body: ViewLogin(),
     );
   }
 }

@@ -1,31 +1,25 @@
+import 'dart:convert';
+
 import 'package:ctracker/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ViewHome extends StatelessWidget {
+  const ViewHome(this.jwt, this.payload, {super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
+  factory ViewHome.fromBase64(String jwt) => 
+    ViewHome(
+      jwt,
+      json.decode(
+        ascii.decode(
+          base64.decode(base64.normalize(jwt.split(".")[1]))
+        )
+      )
     );
-  }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+    final String jwt;
+    final Map<String, dynamic> payload;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
