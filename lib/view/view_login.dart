@@ -3,7 +3,6 @@ import 'package:ctracker/widget/form_text_field.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ctracker/widget/oauth.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ViewLogin extends StatefulWidget {
   const ViewLogin({super.key});
