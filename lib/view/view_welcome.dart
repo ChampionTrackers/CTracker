@@ -1,3 +1,4 @@
+import 'package:ctracker/view/view_login.dart';
 import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/constants/texts.dart';
@@ -111,6 +112,10 @@ class _ViewWelcomeState extends State<ViewWelcome> {
                 margin: const EdgeInsets.only(bottom: 200.0),
                 child: ElevatedButton(
                   onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ViewLogin()), 
+                  );
                     // Ação do botão na última página
                     // print('Botão na última página pressionado');
                   },

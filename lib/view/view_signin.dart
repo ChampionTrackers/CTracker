@@ -1,8 +1,10 @@
 import 'package:ctracker/constants/colors.dart';
+import 'package:ctracker/view/view_login.dart';
 import 'package:ctracker/widget/form_text_field.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ctracker/widget/oauth.dart';
+import 'package:flutter/gestures.dart';
 
 class ViewSignin extends StatefulWidget {
   const ViewSignin({super.key});
@@ -196,13 +198,23 @@ class _ViewSigninState extends State<ViewSignin> {
                   const SizedBox(
                 height: 20,
               ),
-               const Center(
-          child: Text(
-            'Já tenho uma conta',
-            style: TextStyle(
+                Center(
+          child: RichText( 
+            text: TextSpan(
+              children: [
+                 TextSpan(
+            text: 'Já tenho uma conta',
+            recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ViewLogin()));
+                    },
+            style: const TextStyle(
               fontSize: 11,
               color: AppColor.accentColor)
-              )),
+          )]))),
             ],
           ),
         ),
