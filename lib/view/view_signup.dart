@@ -1,47 +1,25 @@
-import 'dart:convert';
-
 import 'package:ctracker/constants/colors.dart';
-import 'package:ctracker/utils/snack_bar.dart';
-import 'package:ctracker/view/view_login.dart';
+import 'package:ctracker/controller/controller_signup.dart';
 import 'package:ctracker/widget/form_text_field.dart';
-import 'package:flutter/foundation.dart';
+import 'package:ctracker/widget/oauth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ctracker/widget/oauth.dart';
-import 'package:http/http.dart' as http;
 
-class ViewSignin extends StatefulWidget {
-  const ViewSignin({super.key});
+class ViewSignup extends StatefulWidget {
+  const ViewSignup({super.key});
 
   @override
-  State<ViewSignin> createState() => _ViewSigninState();
+  State<ViewSignup> createState() => _ViewSignupState();
 }
 
-class _ViewSigninState extends State<ViewSignin> {
+class _ViewSignupState extends State<ViewSignup> {
   final usernameInputController = TextEditingController();
   final emailInputController = TextEditingController();
   final passwordInputController = TextEditingController();
   final confirmPasswordInputController = TextEditingController();
+  final signupController = SignupController();
 
   bool termsCheckbox = false;
-
-  // bool firstvalue = false; //Valor iniciado na checkbox
-
-  Future<int> attemptSignUp(
-      String email, String username, String password) async {
-    var res = await http.post(
-        Uri.parse("https://ctracker-server.onrender.com/v1/signup"),
-        headers: {"Content-Type": "application/json"},
-        body: json.encode({
-          "email": email,
-          "password": password,
-          "name": "Noob",
-          "nickname": username,
-          "picture": null
-        }));
-
-    return res.statusCode;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,28 +126,6 @@ class _ViewSigninState extends State<ViewSignin> {
             const SizedBox(
               height: 40,
             ),
-
-            //checkbox centralizado
-
-            //  Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //    children: [
-            //      Checkbox(value: firstvalue,
-            //      activeColor: AppColor.accentColor,
-            //       onChanged: (value) {
-            //          setState(() {
-            //            firstvalue = value!;
-            //          });
-            //       }),
-
-            //       const Text(
-            //        "Aceito os termos de uso",
-            //       style: TextStyle(
-            //        color: AppColor.textColor,
-            //         ),
-            //       )
-            //    ],
-            // ),
             CheckboxListTile(
               title: const Text(
                 "Aceito os termos de uso",
@@ -188,34 +144,13 @@ class _ViewSigninState extends State<ViewSignin> {
               height: 20,
             ),
             ElevatedButton(
-                onPressed: () async {
-                  var email = emailInputController.text;
-                  var username = usernameInputController.text;
-                  var password = passwordInputController.text;
-                  var confirmPassword = confirmPasswordInputController.text;
-
-                  if (password != confirmPassword) {
-                    snackBar(context, "Senhas não coincidem");
-                    return;
-                  }
-
-                  if (!termsCheckbox) {
-                    snackBar(context, "Você precisa aceitar os termos de uso");
-                    return;
-                  }
-
-                    var res = await attemptSignUp(email, username, password);
-                    if (res == 201) {
-                      snackBar(context, "Conta criada com sucesso");
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ViewLogin()));
-                    } else if (res == 409) {
-                      snackBar(context, "Usuário já existe");
-                    } else {
-                      snackBar(context, "Erro ao criar conta");
-                    }
-                },
+                onPressed: () => signupController.submitSignup(
+                    context,
+                    usernameInputController,
+                    emailInputController,
+                    passwordInputController,
+                    confirmPasswordInputController,
+                    termsCheckbox),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primaryColor,
                     foregroundColor: AppColor.textColor,
@@ -233,10 +168,7 @@ class _ViewSigninState extends State<ViewSignin> {
               text: TextSpan(
                   text: 'Já tenho uma conta',
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => ViewLogin()));
-                    },
+                    ..onTap = () => signupController.pushLogin(context),
                   style: const TextStyle(
                       fontSize: 11, color: AppColor.accentColor)),
             )),

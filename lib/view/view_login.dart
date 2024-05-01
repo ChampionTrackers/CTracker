@@ -1,52 +1,20 @@
-import 'dart:convert';
-
 import 'package:ctracker/constants/colors.dart';
-import 'package:ctracker/utils/snack_bar.dart';
-import 'package:ctracker/view/view_home.dart';
-import 'package:ctracker/view/view_signin.dart';
+import 'package:ctracker/controller/controller_login.dart';
 import 'package:ctracker/widget/form_text_field.dart';
-import 'package:flutter/foundation.dart';
+import 'package:ctracker/widget/oauth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ctracker/widget/oauth.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-final storage = FlutterSecureStorage();
 
 class ViewLogin extends StatelessWidget {
   ViewLogin({super.key});
 
   final emailInputController = TextEditingController();
   final passwordInputController = TextEditingController();
-
-
-  void displayDialog(context, title, text) => showDialog(
-        context: context,
-        builder: (context) =>
-            AlertDialog(title: Text(title), content: Text(text)),
-      );
-
-  Future<String> attemptLogIn(String email, String password) async {
-    var res = await http.post(
-        Uri.parse("https://ctracker-server.onrender.com/v1/login"),
-        headers: {"Content-Type": "application/json"},
-        body: json.encode({
-          "email": email,
-          "password": password,
-        }));
-    
-
-    if (kDebugMode) print(res.statusCode);
-
-    if (res.statusCode == 200) {
-      return res.body;
-    }
-    throw Exception('Email ou Senha incorretos');
-  }
+  final loginController = LoginController();
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -137,25 +105,8 @@ class ViewLogin extends StatelessWidget {
               height: 20,
             ),
             ElevatedButton(
-                onPressed: () async {
-                  var email = emailInputController.text;
-                  var password = passwordInputController.text;
-
-                  try {
-                    var jwt = await attemptLogIn(email, password);
-
-                    storage.write(key: "jwt", value: jwt);
-
-                    if (kDebugMode) print("JWT: $jwt");
-
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewHome.fromBase64(jwt)));
-                  } catch (error) {
-                    snackBar(context, "Email ou Senha incorretos");
-                  }
-                },
+                onPressed: () => loginController.submitLogin(
+                    context, emailInputController, passwordInputController),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primaryColor,
                     foregroundColor: AppColor.textColor,
@@ -181,12 +132,7 @@ class ViewLogin extends StatelessWidget {
               TextSpan(
                 text: ' Criar agora',
                 recognizer: TapGestureRecognizer()
-                  ..onTap = () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ViewSignin()));
-                  },
+                  ..onTap = () => loginController.pushSignup(context),
                 // o código acima não vai funcionar a não ser que o "const" do textspan seja removido (nao sei pq)
                 style: const TextStyle(
                   fontSize: 11,
