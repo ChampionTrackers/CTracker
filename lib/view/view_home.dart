@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/widget/bottom_navigation.dart';
 import 'package:ctracker/widget/tracker_appbar.dart';
@@ -6,20 +5,7 @@ import 'package:ctracker/widget/tracker_drawer.dart';
 import 'package:flutter/material.dart';
 
 class ViewHome extends StatelessWidget {
-  // const ViewHome(this.jwt, this.payload, {super.key});
-
-  // factory ViewHome.fromBase64(String jwt) =>
-  //   ViewHome(
-  //     jwt,
-  //     json.decode(
-  //       ascii.decode(
-  //         base64.decode(base64.normalize(jwt.split(".")[1]))
-  //       )
-  //     )
-  //   );
-
-  //   final String jwt;
-  //   final Map<String, dynamic> payload;
+  const ViewHome({super.key});
 
   @override
   Widget build(BuildContext context) {

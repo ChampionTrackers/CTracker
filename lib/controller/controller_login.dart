@@ -42,7 +42,7 @@ class LoginController {
 
       if (!context.mounted) return;
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => ViewHome.fromBase64(jwt)));
+          MaterialPageRoute(builder: (context) => const ViewHome()));
     } catch (error) {
       snackBar(context, "Email ou Senha incorretos");
     }
