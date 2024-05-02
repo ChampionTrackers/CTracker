@@ -23,7 +23,7 @@ class LoginController {
     if (kDebugMode) print(res.statusCode);
 
     if (res.statusCode == 200) {
-      return res.body;
+      return json.decode(res.body)["token"];
     }
     throw Exception('Request failed with status: ${res.statusCode}');
   }

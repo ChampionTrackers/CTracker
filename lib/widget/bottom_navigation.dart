@@ -31,7 +31,7 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewHome()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewHome()));
             },
           ),
           IconButton(

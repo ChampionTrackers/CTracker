@@ -15,7 +15,7 @@ class SignupController {
           "password": password,
           "name": "Noob",
           "nickname": username,
-          "picture": null
+          "picture": "https://api.dicebear.com/8.x/lorelei/png?seed=$username"
         }));
 
     return res.statusCode;
