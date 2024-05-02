@@ -22,8 +22,8 @@ class _ViewCardsState extends State<ViewCards> {
           child: Column(
             children: [
               SizedBox(
-                width: 360,
-                height: 315,
+                width: 270,
+                height: 305,
                 child: Card(
                   elevation: 5,
                   color: AppColor.primaryColor,
@@ -63,6 +63,7 @@ class _ViewCardsState extends State<ViewCards> {
                               FaIcon(
                                 FontAwesomeIcons.gamepad,
                                 color: AppColor.secondaryColor,
+                                size: 20,
                               ),
                               SizedBox(width: 7), //Espaçamento do icone a borda
                               Text(
@@ -80,7 +81,7 @@ class _ViewCardsState extends State<ViewCards> {
                           Row(
                             children: [
                               FaIcon(
-                                FontAwesomeIcons.desktop,
+                                Icons.desktop_mac_sharp,
                                 color: AppColor.secondaryColor,
                               ),
                               SizedBox(width: 6),
@@ -99,7 +100,7 @@ class _ViewCardsState extends State<ViewCards> {
                           Row(
                             children: [
                               FaIcon(
-                                FontAwesomeIcons.users,
+                                FontAwesomeIcons.user,
                                 color: AppColor.secondaryColor,
                               ),
                               SizedBox(width: 6),
@@ -138,8 +139,8 @@ class _ViewCardsState extends State<ViewCards> {
               // Segundo card
 
               SizedBox(
-                width: 360,
-                height: 315,
+                width: 270,
+                height: 305,
                 child: Card(
                   elevation: 5,
                   color: AppColor.primaryColor,
@@ -179,6 +180,7 @@ class _ViewCardsState extends State<ViewCards> {
                               FaIcon(
                                 FontAwesomeIcons.gamepad,
                                 color: AppColor.secondaryColor,
+                                size: 20,
                               ),
                               SizedBox(width: 7), //Espaçamento do icone a borda
                               Text(
@@ -195,9 +197,9 @@ class _ViewCardsState extends State<ViewCards> {
                           SizedBox(width: 7),
                           Row(
                             children: [
-                              FaIcon(
-                                FontAwesomeIcons.desktop,
-                                color: AppColor.secondaryColor,
+                              Icon(
+                                Icons.desktop_mac_sharp,
+                                color: AppColor.secondaryColor,                               
                               ),
                               SizedBox(width: 6),
                               Text(
@@ -217,6 +219,7 @@ class _ViewCardsState extends State<ViewCards> {
                               FaIcon(
                                 FontAwesomeIcons.users,
                                 color: AppColor.secondaryColor,
+                                size: 20,
                               ),
                               SizedBox(width: 6),
                               Text(
@@ -230,12 +233,13 @@ class _ViewCardsState extends State<ViewCards> {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 7),
+                          SizedBox(width: 11),
                           Row(
                             children: [
                               FaIcon(
                                 FontAwesomeIcons.calendar,
                                 color: AppColor.secondaryColor,
+                                size: 20,
                               ),
                               SizedBox(width: 6),
                               Text(

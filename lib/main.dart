@@ -1,5 +1,5 @@
 import 'package:ctracker/view/view_more_tournaments.dart';
-import 'package:ctracker/widget/splashscreen.dart';
+import 'package:ctracker/widget/animations.dart';
 import 'package:ctracker/view/view_login.dart';
 import 'package:ctracker/view/view_signin.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SplashScreen(),
+      body: ViewCards(),
     );
   }
 }
