@@ -114,7 +114,7 @@ class _ViewWelcomeState extends State<ViewWelcome> {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ViewLogin()), 
+                        MaterialPageRoute(builder: (context) => ViewLogin()), 
                   );
                     // Ação do botão na última página
                     // print('Botão na última página pressionado');

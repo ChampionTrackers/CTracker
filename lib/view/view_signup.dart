@@ -1,20 +1,28 @@
 import 'package:ctracker/constants/colors.dart';
-import 'package:ctracker/controller/controller_login.dart';
+import 'package:ctracker/controller/controller_signup.dart';
 import 'package:ctracker/widget/form_text_field.dart';
 import 'package:ctracker/widget/oauth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class ViewLogin extends StatelessWidget {
-  ViewLogin({super.key});
+class ViewSignup extends StatefulWidget {
+  const ViewSignup({super.key});
 
+  @override
+  State<ViewSignup> createState() => _ViewSignupState();
+}
+
+class _ViewSignupState extends State<ViewSignup> {
+  final usernameInputController = TextEditingController();
   final emailInputController = TextEditingController();
   final passwordInputController = TextEditingController();
-  final loginController = LoginController();
+  final confirmPasswordInputController = TextEditingController();
+  final signupController = SignupController();
+
+  bool termsCheckbox = false;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -26,7 +34,7 @@ class ViewLogin extends StatelessWidget {
               height: 50,
             ),
             const Text(
-              "Logar-se no\n Champions Tracker\n",
+              "Cadastre-se no\n Champions Tracker\n",
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 24.0,
@@ -81,9 +89,19 @@ class ViewLogin extends StatelessWidget {
               height: 20,
             ),
             FormTextField(
+              keyboardType: TextInputType.text,
+              labelText: "Username",
+              controller: usernameInputController,
+              hintText: "ChampionMaster",
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FormTextField(
               keyboardType: TextInputType.emailAddress,
               labelText: "Email",
               controller: emailInputController,
+              hintText: "champion@email.com",
             ),
             const SizedBox(
               height: 20,
@@ -92,21 +110,47 @@ class ViewLogin extends StatelessWidget {
               keyboardType: TextInputType.text,
               labelText: "Senha",
               controller: passwordInputController,
+              hintText: "Digite sua senha",
               passwordField: true,
             ),
             const SizedBox(
               height: 20,
             ),
-            const Center(
-                child: Text('Esqueceu sua senha?',
-                    style:
-                        TextStyle(fontSize: 11, color: AppColor.accentColor))),
+            FormTextField(
+              keyboardType: TextInputType.text,
+              labelText: "Confirme sua Senha",
+              controller: confirmPasswordInputController,
+              hintText: "Digite a sua senha novamente",
+              passwordField: true,
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            CheckboxListTile(
+              title: const Text(
+                "Aceito os termos de uso",
+                style: TextStyle(color: AppColor.textColor),
+              ),
+              value: termsCheckbox,
+              onChanged: (value) {
+                setState(() {
+                  termsCheckbox = !termsCheckbox;
+                });
+              },
+              activeColor: AppColor.accentColor,
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
             const SizedBox(
               height: 20,
             ),
             ElevatedButton(
-                onPressed: () => loginController.submitLogin(
-                    context, emailInputController, passwordInputController),
+                onPressed: () => signupController.submitSignup(
+                    context,
+                    usernameInputController,
+                    emailInputController,
+                    passwordInputController,
+                    confirmPasswordInputController,
+                    termsCheckbox),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primaryColor,
                     foregroundColor: AppColor.textColor,
@@ -115,32 +159,19 @@ class ViewLogin extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.only(
                         left: 70, right: 70, top: 20, bottom: 20)),
-                child: const Text("LOGAR")),
+                child: const Text("CRIAR UMA CONTA")),
             const SizedBox(
               height: 20,
             ),
             Center(
                 child: RichText(
-                    text: TextSpan(children: [
-              const TextSpan(
-                text: 'Não tem uma conta?',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: AppColor.secondaryColor,
-                ),
-              ),
-              TextSpan(
-                text: ' Criar agora',
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () => loginController.pushSignup(context),
-                // o código acima não vai funcionar a não ser que o "const" do textspan seja removido (nao sei pq)
-                style: const TextStyle(
-                  fontSize: 11,
-                  color: AppColor.accentColor,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ]))),
+              text: TextSpan(
+                  text: 'Já tenho uma conta',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => signupController.pushLogin(context),
+                  style: const TextStyle(
+                      fontSize: 11, color: AppColor.accentColor)),
+            )),
           ],
         ),
       ),

@@ -1,256 +1,129 @@
 import 'package:ctracker/constants/colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:ctracker/widget/bottom_navigation.dart';
+import 'package:ctracker/widget/tracker_appbar.dart';
+import 'package:ctracker/widget/tracker_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ViewCards extends StatefulWidget {
-  const ViewCards({Key? key}) : super(key: key);
+class ViewCard extends StatelessWidget {
+  const ViewCard({super.key});
 
-  @override
-  State<ViewCards> createState() => _ViewCardsState();
-}
-
-class _ViewCardsState extends State<ViewCards> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      appBar: const TrackerAppBar(),
+      endDrawer: const TrackerDrawer(),
+      bottomNavigationBar: const BottomNavigation(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        backgroundColor: AppColor.secondAccentColor,
+        child: const Icon(Icons.search),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.only(left: 50, right: 50), // Ajusta a largura do card
+              children: [
+                _buildCard(
+                  'assets/images/CSGO.jpg',
+                  'Counter-Strike: GO',
+                ),
+                _buildCard(
+                  'assets/images/Sword.png',
+                  'Sword Fighting',
+                ),
+                _buildCard(
+                  'assets/images/TFT.jpg',
+                  'Teamfight Tactics',
+                ),
+                _buildCard(
+                  'assets/images/lol.png',
+                  'Champions\' League',
+                ),             
+              ],
+            ),
+          ),
+          const SizedBox(height: 60),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCard(
+  String imagePath,
+  String title,
+) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0), // Adicionando margem apenas na parte superior
+    child: Container(
+      height: 280,
+      child: Card(
+        margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+        color: const Color.fromRGBO(46, 56, 86, 1),
+        child: Container(
+          height: 280, // Altura desejada para o cartão
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 270,
-                height: 305,
-                child: Card(
-                  elevation: 5,
-                  color: AppColor.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 2),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'assets/images/csgo.jpg',
-                          width: 220,
-                          height: 120,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'STRIKE DA BOA',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: AppColor.textColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),                   
-                     const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(width: 8),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.gamepad,
-                                color: AppColor.secondaryColor,
-                                size: 20,
-                              ),
-                              SizedBox(width: 7), //Espaçamento do icone a borda
-                              Text(
-                                'Counter-Strike:GO',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),                  
-                        ],
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(width: 7),
-                          Row(
-                            children: [
-                              FaIcon(
-                                Icons.desktop_mac_sharp,
-                                color: AppColor.secondaryColor,
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                'Virtual',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(width: 7),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.user,
-                                color: AppColor.secondaryColor,
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                '24 Participantes',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(width: 7),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.calendar,
-                                color: AppColor.secondaryColor,
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                '01/07/2024',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),              
-                        ],
-                      ),
-                    ],
-                  ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                height: 100,
+                width: double.infinity,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
                 ),
               ),
-
-              // Segundo card
-
-              SizedBox(
-                width: 270,
-                height: 305,
-                child: Card(
-                  elevation: 5,
-                  color: AppColor.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 2),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'assets/images/lol.png',
-                          width: 220,
-                          height: 120,
-                          fit: BoxFit.fill,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          color: AppColor.textColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Champions\' League',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: AppColor.textColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                      const SizedBox(height: 10),
                       const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 8),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.gamepad,
-                                color: AppColor.secondaryColor,
-                                size: 20,
-                              ),
-                              SizedBox(width: 7), //Espaçamento do icone a borda
-                              Text(
-                                'League of Legends',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),                  
+                          Icon(Icons.gamepad, color: AppColor.textColor),
+                          SizedBox(width: 5),
+                          Text('CS:GO', style: TextStyle(color: AppColor.textColor)),
                         ],
                       ),
+                      const SizedBox(height: 5),
                       const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 7),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.desktop_mac_sharp,
-                                color: AppColor.secondaryColor,                               
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                'Virtual',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),
+                          Icon(Icons.location_on, color: AppColor.textColor),
+                          SizedBox(width: 5),
+                          Text('Virtual', style: TextStyle(color: AppColor.textColor)),
                         ],
                       ),
+                      const SizedBox(height: 5),
                       const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 7),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.users,
-                                color: AppColor.secondaryColor,
-                                size: 20,
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                '76 Participantes',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),
+                          Icon(Icons.calendar_today, color: AppColor.textColor),
+                          SizedBox(width: 5),
+                          Text('Data: 10/05/2024', style: TextStyle(color: AppColor.textColor)),
                         ],
                       ),
+                      const SizedBox(height: 5),
                       const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 11),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.calendar,
-                                color: AppColor.secondaryColor,
-                                size: 20,
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                '20/08/2024',
-                                style: TextStyle(color: AppColor.textColor),
-                              ),
-                            ],
-                          ),
+                          Icon(Icons.people, color: AppColor.textColor),
+                          SizedBox(width: 5),
+                          Text('Participantes: 10', style: TextStyle(color: AppColor.textColor)),
                         ],
                       ),
-                      // const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -259,6 +132,7 @@ class _ViewCardsState extends State<ViewCards> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+ }
 }
