@@ -1,4 +1,8 @@
 import 'package:ctracker/constants/colors.dart';
+import 'package:ctracker/view/view_feed.dart';
+import 'package:ctracker/view/view_home.dart';
+import 'package:ctracker/view/view_profile.dart';
+import 'package:ctracker/view/view_shop.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -26,7 +30,9 @@ class _BottomNavigation extends State<BottomNavigation> {
               color: AppColor.textColor,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewHome()));
+            },
           ),
           IconButton(
             icon: const Icon(
@@ -34,7 +40,9 @@ class _BottomNavigation extends State<BottomNavigation> {
               color: AppColor.textColor,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewProfile()));
+            },
           ),
           const Opacity(
             opacity: 0,
@@ -49,7 +57,9 @@ class _BottomNavigation extends State<BottomNavigation> {
               color: AppColor.textColor,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewFeed()));
+            },
           ),
           IconButton(
             icon: const Icon(
@@ -57,7 +67,9 @@ class _BottomNavigation extends State<BottomNavigation> {
               color: AppColor.textColor,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewShop()));
+            },
           ),
         ],
       ),

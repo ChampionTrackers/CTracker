@@ -1,4 +1,7 @@
 import 'package:ctracker/constants/colors.dart';
+import 'package:ctracker/widget/bottom_navigation.dart';
+import 'package:ctracker/widget/tracker_appbar.dart';
+import 'package:ctracker/widget/tracker_drawer.dart';
 import 'package:flutter/material.dart';
 
 class ViewProfile extends StatefulWidget {
@@ -8,13 +11,21 @@ class ViewProfile extends StatefulWidget {
 }
 
 class _ViewProfileState extends State<ViewProfile> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const TrackerAppBar(),
+      endDrawer: const TrackerDrawer(),
+      bottomNavigationBar: const BottomNavigation(),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+          backgroundColor: AppColor.secondAccentColor,
+          child: const Icon(Icons.search)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,11 +52,10 @@ class _ViewProfileState extends State<ViewProfile> {
                           BorderRadius.circular(100), // Raio de borda de 10 pixels
                     ),
                   ),*/
-              
               ),
-
               const Text("[Nome]",
-                  style: TextStyle(fontSize: 24,
+                  style: TextStyle(
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: AppColor.textColor)),
               Container(
@@ -63,7 +73,8 @@ class _ViewProfileState extends State<ViewProfile> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: const Row(//Linha
+                          child: const Row(
+                            //Linha
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -86,16 +97,18 @@ class _ViewProfileState extends State<ViewProfile> {
                           ),
                         ),
                       ])),
-              Container( // Conteudo das Atividades
+              Container(
+                // Conteudo das Atividades
                 margin: const EdgeInsets.only(top: 10, bottom: 20),
                 child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row(//Linha1
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,          
+                      child: const Row(
+                        //Linha1
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
@@ -109,7 +122,8 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 10, 20), // Espaço entre os textos
+                            padding: EdgeInsets.fromLTRB(
+                                0, 0, 10, 20), // Espaço entre os textos
                             child: Text(
                               "Placeholder",
                               style: TextStyle(
@@ -122,10 +136,10 @@ class _ViewProfileState extends State<ViewProfile> {
                         ],
                       ),
                     ),
-
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row( //Linha2
+                      child: const Row(
+                        //Linha2
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -152,10 +166,10 @@ class _ViewProfileState extends State<ViewProfile> {
                         ],
                       ),
                     ),
-
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row( //Linha3
+                      child: const Row(
+                        //Linha3
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -182,10 +196,10 @@ class _ViewProfileState extends State<ViewProfile> {
                         ],
                       ),
                     ),
-
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row( //Linha4
+                      child: const Row(
+                        //Linha4
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -214,7 +228,8 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row( //Linha5
+                      child: const Row(
+                        //Linha5
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -241,12 +256,11 @@ class _ViewProfileState extends State<ViewProfile> {
                         ],
                       ),
                     ),
-
                   ],
                 ),
               ),
-
-              Container(  // Header de Historico
+              Container(
+                  // Header de Historico
                   margin: const EdgeInsets.only(top: 0, bottom: 20),
                   height: 45,
                   width: 800,
@@ -260,7 +274,8 @@ class _ViewProfileState extends State<ViewProfile> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: const Row( //Linha
+                          child: const Row(
+                            //Linha
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
@@ -275,7 +290,8 @@ class _ViewProfileState extends State<ViewProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0), // Espaço entre os textos
+                                padding: EdgeInsets.fromLTRB(
+                                    10, 0, 0, 0), // Espaço entre os textos
                                 child: Text(
                                   "Ver Mais +",
                                   style: TextStyle(
@@ -284,19 +300,21 @@ class _ViewProfileState extends State<ViewProfile> {
                                     color: AppColor.secondAccentColor,
                                   ),
                                 ),
-                              )],
+                              )
+                            ],
                           ),
                         ),
                       ])),
-
               Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 50),// Conteudo das Historico
-                child:  Column(
+                margin: const EdgeInsets.only(
+                    top: 10, bottom: 50), // Conteudo das Historico
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row(//Linha1
+                      child: const Row(
+                        //Linha1
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -310,7 +328,8 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 10, 0), // Espaço entre os textos
+                            padding: EdgeInsets.fromLTRB(
+                                0, 0, 10, 0), // Espaço entre os textos
                             child: Text(
                               "Placeholder",
                               style: TextStyle(
@@ -324,7 +343,8 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row(//Linha2
+                      child: const Row(
+                        //Linha2
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -353,37 +373,8 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row(//Linha3
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(40, 0, 10, 0),
-                            child: Text(
-                              "+",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: AppColor.textColor,
-                              ),
-                            ),
-                          ),
-                          // Espaço entre os textos
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: Text(
-                              "Placeholder",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: AppColor.secondaryColor,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row( //Linha4
+                      child: const Row(
+                        //Linha3
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -412,7 +403,8 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: const Row(//Linha5
+                      child: const Row(
+                        //Linha4
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
@@ -439,14 +431,42 @@ class _ViewProfileState extends State<ViewProfile> {
                         ],
                       ),
                     ),
-
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: const Row(
+                        //Linha5
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(40, 0, 10, 0),
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: AppColor.textColor,
+                              ),
+                            ),
+                          ),
+                          // Espaço entre os textos
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                            child: Text(
+                              "Placeholder",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: AppColor.secondaryColor,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-
-
-              Container(  // Header de Amigos
-                  margin: const EdgeInsets.only(top:0, bottom: 20),
+              Container(
+                  // Header de Amigos
+                  margin: const EdgeInsets.only(top: 0, bottom: 20),
                   height: 45,
                   width: 800,
                   decoration: BoxDecoration(
@@ -458,7 +478,8 @@ class _ViewProfileState extends State<ViewProfile> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: const Row( //Linha
+                          child: const Row(
+                            //Linha
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
@@ -473,7 +494,8 @@ class _ViewProfileState extends State<ViewProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 10, 0, 0), // Espaço entre os textos
+                                padding: EdgeInsets.fromLTRB(
+                                    0, 10, 0, 0), // Espaço entre os textos
                                 child: Text(
                                   "Ver Mais +",
                                   style: TextStyle(
@@ -495,7 +517,6 @@ class _ViewProfileState extends State<ViewProfile> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-
                   children: [
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -508,40 +529,47 @@ class _ViewProfileState extends State<ViewProfile> {
                             height: 70,
                             decoration: BoxDecoration(
                               color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(100), // Adiciona borda arredondada ao Container
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adiciona borda arredondada ao Container
                             ),
                           ),
-                          const SizedBox(width: 10), // Espaço entre os Containers
-                      
+                          const SizedBox(
+                              width: 10), // Espaço entre os Containers
+
                           Container(
                             //amigo2
                             width: 70,
                             height: 70,
                             decoration: BoxDecoration(
                               color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(100), // Adiciona borda arredondada ao Container
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adiciona borda arredondada ao Container
                             ),
                           ),
-                          const SizedBox(width: 10), // Espaço entre os Containers
-                      
+                          const SizedBox(
+                              width: 10), // Espaço entre os Containers
+
                           Container(
                             //amigo3
                             width: 70,
                             height: 70,
                             decoration: BoxDecoration(
                               color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(100), // Adiciona borda arredondada ao Container
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adiciona borda arredondada ao Container
                             ),
                           ),
-                          const SizedBox(width: 10), // Espaço entre os Containers
-                      
+                          const SizedBox(
+                              width: 10), // Espaço entre os Containers
+
                           Container(
                             //amigo4
                             width: 70,
                             height: 70,
                             decoration: BoxDecoration(
                               color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(100), // Adiciona borda arredondada ao Container
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adiciona borda arredondada ao Container
                             ),
                           ),
                         ],
