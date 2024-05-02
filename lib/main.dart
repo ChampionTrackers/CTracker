@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ctracker/view/view_home.dart';
 import 'package:ctracker/view/view_login.dart';
+import 'package:ctracker/view/view_profile.dart';
 import 'package:ctracker/view/view_signup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ Future<String> get verifyJwt async {
               return const ViewHome();
             }
           } else {
-            return ViewLogin();
+            return ViewProfile();
           }
         }, 
       );
