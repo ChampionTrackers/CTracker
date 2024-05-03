@@ -5,6 +5,8 @@ import 'package:ctracker/widget/tracker_drawer.dart';
 import 'package:flutter/material.dart';
 
 class ViewShop extends StatelessWidget {
+  const ViewShop({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

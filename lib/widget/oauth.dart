@@ -6,11 +6,11 @@ class OAuth extends StatelessWidget {
   final Color containerColor;
   
   const OAuth({
-    Key? key,
+    super.key,
     required this.imagePath,
     this.borderColor = Colors.white,
     this.containerColor = Colors.white,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
