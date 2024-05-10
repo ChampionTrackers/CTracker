@@ -1,12 +1,8 @@
 import 'package:ctracker/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+class ViewTournament extends StatelessWidget {
+  const ViewTournament({Key? key});
 
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Informações'),
@@ -31,7 +27,6 @@ class MyApp extends StatelessWidget {
                 children: [
                   Container(
                     height: 150,
-                    // Altura da imagem
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/images/sword.png'),
@@ -45,49 +40,62 @@ class MyApp extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(
-                          padding: EdgeInsets.fromLTRB(16, 8, 0, 0),
+                          padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
                           child: Text(
-                            'Sword Fighters', // Título abaixo das informações
-                            style: TextStyle(color: AppColor.textColor, fontSize: 32, fontWeight: FontWeight.bold),
+                            'Sword Fighters',
+                            style: TextStyle(
+                                color: AppColor.textColor,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: AppColor.primaryColor,
-                                borderRadius: BorderRadius.circular(100),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: AppColor.primaryColor,
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: const Icon(Icons.person,
+                                    color: Colors.white),
                               ),
-                              child: const Icon(Icons.person, color: Colors.white), // Ícone de usuário
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Organizado por', // Subtítulo abaixo do título
-                                    style: TextStyle(color: AppColor.textColor, fontSize: 16),
-                                  ),
-                                  Text(
-                                    'Fenix', // Subtítulo abaixo do título
-                                    style: TextStyle(color: AppColor.accentColor, fontSize: 16),
-                                  ),
-                                ],
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Organizado por',
+                                      style: TextStyle(
+                                          color: AppColor.textColor,
+                                          fontSize: 16),
+                                    ),
+                                    Text(
+                                      'Fenix',
+                                      style: TextStyle(
+                                          color: AppColor.accentColor,
+                                          fontSize: 16),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                   const TabBar(
-                    unselectedLabelColor: AppColor.textColor,
+                    unselectedLabelColor: Color.fromARGB(113, 239, 239, 239),
                     labelColor: AppColor.textColor,
                     indicatorColor: AppColor.secondAccentColor,
+                    labelStyle:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     tabs: myTabs,
                   ),
                 ],
@@ -96,21 +104,16 @@ class MyApp extends StatelessWidget {
           ),
           body: TabBarView(
             children: myTabs.map((Tab tab) {
-              // Conteudo da tela de Informações
               if (tab.text == 'Informações') {
                 return buildInformacoesContent();
-              }
-              // Conteudo da tela de Histórico
-              else if (tab.text == 'Histórico') {
+              } else if (tab.text == 'Histórico') {
                 return buildHistoricoContent();
-              }
-              // Conteudo da tela de Posições
-              else {
+              } else {
                 final String label = tab.text!.toLowerCase();
                 return Center(
                   child: Text(
                     'This is the $label tab',
-                    style: const TextStyle(fontSize: 36),
+                    style: const TextStyle(fontSize: 32),
                   ),
                 );
               }
@@ -123,180 +126,273 @@ class MyApp extends StatelessWidget {
 
   Widget buildInformacoesContent() {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Regras do Campeonato',
-              style: TextStyle(color: AppColor.textColor, fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Lorem ipsum dolor sit amet est ut et consequat nonumy dolor et accusam justo dolor. Sea justo dignissim justo nonumy duo diam praesent diam rebum amet et dolor vel aliquyam ',
-              style: TextStyle(color: AppColor.textColor, fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Informações', // Texto da descrição
-              style: TextStyle(color: AppColor.textColor, fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8), // Espaçamento entre o texto e os cards
-            Container(
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: AppColor.tertiaryColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Equipes participando: 10',
-                      style: TextStyle(color: AppColor.textColor, fontSize: 18),
-                    ),
-                    Text(
-                      'Palpitadores: 12',
-                      style: TextStyle(color: AppColor.textColor, fontSize: 18),
-                    ),
-                    Text(
-                      'Fechamento dos palpites: 13/07/2024',
-                      style: TextStyle(color: AppColor.textColor, fontSize: 18),
-                    ),
-                    Text(
-                      'Palpitador com mais pontos: Kleberson',
-                      style: TextStyle(color: AppColor.textColor, fontSize: 18),
-                    ),
-                    Text(
-                      'Melhor jogador: Giovanne',
-                      style: TextStyle(color: AppColor.textColor, fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16), // Espaçamento entre o campo de imagem e os amigos
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
+        child: Padding(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    // Adicionando a Box Decoration aos amigos
-                    margin: const EdgeInsets.only(top: 0, bottom: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: const Row(
-                            //Linha
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                                child: Text(
-                                  "AMIGOS",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColor.textColor,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 10, 0, 0), // Espaço entre os textos
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  const Text(
+                    'Regras do Campeonato',
+                    style: TextStyle(
+                        color: AppColor.textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Lorem ipsum dolor sit amet est ut et consequat nonumy dolor et accusam justo dolor. Sea justo dignissim justo nonumy duo diam praesent diam rebum amet et dolor vel aliquyam ',
+                    style: TextStyle(color: AppColor.textColor, fontSize: 16),
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    'Informações',
+                    style: TextStyle(
+                        color: AppColor.textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 15),
+                  // Informações
                   Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 20),
-                    width: 800,
+                    margin: const EdgeInsets.all(0.1),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      color: AppColor.tertiaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColor.tertiaryColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Equipes participando: ',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                              Text(
+                                '10',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Palpitadores: ',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                              Text(
+                                '16',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Fechamento dos palpites: ',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                              Text(
+                                '13/07/2024',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Palpitador com mais pontos: ',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                              Text(
+                                'Kleberson',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Melhor jogador: ',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                              Text(
+                                'Giovanne',
+                                style: TextStyle(
+                                    color: AppColor.textColor, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      child: Column(children: [
+                        Container(
+                            margin: const EdgeInsets.only(top: 0, bottom: 0),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      margin:
+                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                      child: const Row(
+                                          //Linha
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 0, 0, 0),
+                                              child: Text(
+                                                "Equipes Inscritas",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColor.textColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ])),
+                                ]))
+                      ])),
+
+                  Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    width: 900,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: AppColor.tertiaryColor,
+                      borderRadius: BorderRadius.circular(5),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Wrap(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(top: 12),
+                              width: 45,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor,
+                                borderRadius: BorderRadius.circular(
+                                  100,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 12),
+                              width: 45,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor,
+                                borderRadius: BorderRadius.circular(
+                                  100,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 12),
+                              width: 45,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor,
+                                borderRadius: BorderRadius.circular(
+                                  100,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 12),
+                              width: 45,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor,
+                                borderRadius: BorderRadius.circular(
+                                  100,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 12),
+                              width: 45,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor,
+                                borderRadius: BorderRadius.circular(
+                                  100,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Text(
+                            'Acompanhe o campeonato aqui',
+                            style: TextStyle(
+                              color: AppColor.textColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
                         Container(
-                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Wrap(
-                            children: [
-                              Container(
-                                //amigo1
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(
-                                    100,
-                                  ), // Adiciona borda arredondada ao Container
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ), // Espaço entre os Containers
-                              Container(
-                                //amigo2
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(
-                                    100,
-                                  ), // Adiciona borda arredondada ao Container
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ), // Espaço entre os Containers
-                              Container(
-                                //amigo3
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(
-                                    100,
-                                  ), // Adiciona borda arredondada ao Container
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ), // Espaço entre os Containers
-                              Container(
-                                //amigo4
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(
-                                    100,
-                                  ), // Adiciona borda arredondada ao Container
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ), // Espaço entre os Containers
-                            ],
+                          height: 200, // Altura do mapa
+                          decoration: BoxDecoration(
+                            color: AppColor.tertiaryColor,
+                            borderRadius: BorderRadius.circular(5),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                ])));
   }
 
   Widget buildHistoricoContent() {
