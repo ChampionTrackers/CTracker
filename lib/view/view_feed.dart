@@ -40,7 +40,7 @@ class ViewFeed extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: SizedBox(
                     height: 160,
                     child: ListView(
@@ -51,27 +51,21 @@ class ViewFeed extends StatelessWidget {
                             championshipName: "Sword Fighters",
                             coins: 20),
                         const Divider(
-                          color: AppColor.accentColor,
-                          indent: 20,
-                          endIndent: 20,
+                          color: AppColor.accentColor
                         ),
                         _buildGuessRow(
                             teamName: "Death Lock",
                             championshipName: "Jogo da Velha",
                             coins: 15),
                         const Divider(
-                          color: AppColor.accentColor,
-                          indent: 20,
-                          endIndent: 20,
+                          color: AppColor.accentColor
                         ),
                         _buildGuessRow(
                             teamName: "Equipe Foguete",
                             championshipName: "Bolinha de Gude Ultimate",
                             coins: 7),
                         const Divider(
-                          color: AppColor.accentColor,
-                          indent: 20,
-                          endIndent: 20,
+                          color: AppColor.accentColor
                         ),
                         _buildGuessRow(
                             teamName: "Destroyers2000",
@@ -163,7 +157,7 @@ class ViewFeed extends StatelessWidget {
           TableCell(
             child: Container(
               padding: const EdgeInsets.all(3.0),
-              color: AppColor.primaryColor,
+              color: const Color.fromARGB(178, 46, 56, 86),
               alignment: Alignment.center,
               child: const Text(
                 'TIPO',
@@ -177,7 +171,7 @@ class ViewFeed extends StatelessWidget {
           TableCell(
             child: Container(
               padding: const EdgeInsets.all(3.0),
-              color: AppColor.primaryColor,
+              color: const Color.fromARGB(178, 46, 56, 86),
               alignment: Alignment.center,
               child: const Text(
                 'NOME DO TORNEIO',
@@ -191,7 +185,7 @@ class ViewFeed extends StatelessWidget {
           TableCell(
             child: Container(
               padding: const EdgeInsets.all(3.0),
-              color: AppColor.primaryColor,
+              color: const Color.fromARGB(178, 46, 56, 86),
               alignment: Alignment.center,
               child: const Text(
                 'STATUS',
@@ -212,6 +206,7 @@ class ViewFeed extends StatelessWidget {
               child: const Icon(
                 Icons.monitor,
                 color: AppColor.textColor,
+                size: 20,
               ),
             )
           ),
@@ -251,6 +246,7 @@ class ViewFeed extends StatelessWidget {
               child: const Icon(
                 Icons.directions_run,
                 color: AppColor.textColor,
+                size: 20,
               ),
             )
           ),
@@ -291,7 +287,7 @@ class ViewFeed extends StatelessWidget {
       int playerCount = 0,
       required String imagePath}) {
     return Card(
-      color: AppColor.primaryColor,
+      color: const Color.fromARGB(178, 46, 56, 86),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: SizedBox(
