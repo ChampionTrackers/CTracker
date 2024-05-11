@@ -81,6 +81,249 @@ class ViewFeed extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Suas Equipes",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: AppColor.textColor,
+                      )),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        minimumSize: Size.zero,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        backgroundColor: AppColor.secondAccentColor,
+                      ),
+                      child: const Text(
+                        "VER MAIS",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 90,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    _buildTeamCard(
+                        teamName: "Equipe Foguete",
+                        wins: 3,
+                        playerCount: 5,
+                        imagePath:
+                            "https://picsum.photos/seed/foguete/200/200"),
+                    _buildTeamCard(
+                        teamName: "Equipe Invejosos",
+                        wins: 2,
+                        playerCount: 3,
+                        imagePath:
+                            "https://picsum.photos/seed/invejosos/200/200"),
+                    _buildTeamCard(
+                        teamName: "Alvejante Plays",
+                        wins: 3,
+                        playerCount: 5,
+                        imagePath:
+                            "https://picsum.photos/seed/alvejante/200/200"),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text("Seus Torneios",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.textColor,
+                  )),
+              const SizedBox(height: 20),
+              _buildTournamentTable(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTournamentTable() {
+    return Table(
+      columnWidths: const {
+        0: FlexColumnWidth(1),
+        1: FlexColumnWidth(2),
+        2: FlexColumnWidth(1),
+      },
+      children: [
+        TableRow(children: [
+          TableCell(
+            child: Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.primaryColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'TIPO',
+                style: TextStyle(
+                  color: AppColor.textColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          TableCell(
+            child: Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.primaryColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'NOME DO TORNEIO',
+                style: TextStyle(
+                  color: AppColor.textColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          TableCell(
+            child: Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.primaryColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'STATUS',
+                style: TextStyle(
+                  color: AppColor.textColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ]),
+        TableRow(children: [
+          TableCell(child: 
+            Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.backgroundColor,
+              alignment: Alignment.center,
+              child: const Icon(
+                Icons.monitor,
+                color: AppColor.textColor,
+              ),
+            )
+          ),
+          TableCell(child: 
+            Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.backgroundColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'Sword Fighters',
+                style: TextStyle(
+                  color: AppColor.textColor,
+                ),
+              ),
+            )
+          ),
+          TableCell(child: 
+            Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.backgroundColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'ATIVO',
+                style: TextStyle(
+                  color: AppColor.secondAccentColor,
+                ),
+              ),
+            )
+          ),
+        ]),
+        TableRow(children: [
+          TableCell(child: 
+            Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.tertiaryColor,
+              alignment: Alignment.center,
+              child: const Icon(
+                Icons.directions_run,
+                color: AppColor.textColor,
+              ),
+            )
+          ),
+          TableCell(child: 
+            Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.tertiaryColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'Campeões de Maringá',
+                style: TextStyle(
+                  color: AppColor.textColor,
+                ),
+              ),
+            )
+          ),
+          TableCell(child: 
+            Container(
+              padding: const EdgeInsets.all(3.0),
+              color: AppColor.tertiaryColor,
+              alignment: Alignment.center,
+              child: const Text(
+                'INATIVO',
+                style: TextStyle(
+                  color: AppColor.secondAccentColor,
+                ),
+              ),
+            )
+          ),
+        ]),
+      ],
+    );
+  }
+
+  Widget _buildTeamCard(
+      {required String teamName,
+      int wins = 0,
+      int playerCount = 0,
+      required String imagePath}) {
+    return Card(
+      color: AppColor.primaryColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: SizedBox(
+          width: 180,
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: AppColor.tertiaryColor,
+                backgroundImage: NetworkImage(imagePath),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: teamName,
+                        style: const TextStyle(
+                            color: AppColor.secondAccentColor,
+                            fontWeight: FontWeight.bold)),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 5),
+                  Text("Vitórias: $wins",
+                      style: const TextStyle(
+                          color: AppColor.textColor, fontSize: 12)),
+                  Text("Jogadores: $playerCount",
+                      style: const TextStyle(
+                          color: AppColor.textColor, fontSize: 12)),
+                ],
               )
             ],
           ),
