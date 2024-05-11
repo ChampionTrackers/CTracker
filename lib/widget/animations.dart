@@ -1,8 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:ctracker/constants/colors.dart';
-import 'package:ctracker/view/view_home.dart';
 import 'package:ctracker/view/view_login.dart';
-import 'package:ctracker/view/view_welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
