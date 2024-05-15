@@ -61,6 +61,6 @@ class SignupController {
 
   pushLogin(BuildContext context) {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => ViewLogin()));
+        context, MaterialPageRoute(builder: (context) => const ViewLogin()));
   }
 }
