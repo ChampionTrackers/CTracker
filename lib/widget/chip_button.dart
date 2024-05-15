@@ -18,7 +18,7 @@ class _ChipButton extends State<ChipButton>{
   Widget build(BuildContext context){
     return FilterChip(
       label: Text(widget.labelText),
-        labelStyle: TextStyle(color: AppColor.textColor, fontSize: 14.0, fontWeight: FontWeight.bold),
+        labelStyle: const TextStyle(color: AppColor.textColor, fontSize: 14.0, fontWeight: FontWeight.bold),
       selected: _isSelected,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),

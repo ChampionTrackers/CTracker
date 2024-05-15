@@ -58,7 +58,7 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewFeed()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewFeed()));
             },
           ),
           IconButton(
@@ -68,7 +68,7 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewShop()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewShop()));
             },
           ),
         ],

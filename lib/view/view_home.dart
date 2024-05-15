@@ -38,17 +38,19 @@ class ViewHome extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // ação para o botão "Ver mais"
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.secondAccentColor,
-                      textStyle: const TextStyle(
-                          color: AppColor.textColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    child: const Text('Ver mais'),
-                  ),
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        minimumSize: Size.zero,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        backgroundColor: AppColor.secondAccentColor,
+                      ),
+                      child: const Text(
+                        "VER MAIS",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ))
                 ],
               ),
             ),
