@@ -19,7 +19,31 @@ class _ViewSignupState extends State<ViewSignup> {
   final confirmPasswordInputController = TextEditingController();
   final signupController = SignupController();
 
-  bool termsCheckbox = false;
+  bool _termsCheckbox = false;
+  bool _isLoading = false;
+
+  void _submitSignup() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await signupController.submitSignup(
+        context,
+        usernameInputController,
+        emailInputController,
+        passwordInputController,
+        confirmPasswordInputController,
+        _termsCheckbox,
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,82 +54,78 @@ class _ViewSignupState extends State<ViewSignup> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const SizedBox(
-              height: 50,
-            ),
+            const SizedBox(height: 50),
             const Text(
               "Cadastre-se no\n Champions Tracker\n",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.textColor),
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: AppColor.textColor,
+              ),
             ),
             const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  OAuth(
-                    imagePath: 'assets/images/discordlogo.png', //OAuth Discord
-                    borderColor: Color.fromRGBO(88, 101, 242, 1),
-                    containerColor: Color.fromRGBO(88, 101, 242, 1),
-                  ),
-                  SizedBox(width: 35),
-                  OAuth(
-                    imagePath: 'assets/images/twitterlogo.png', //OAuth Twitter
-                    borderColor: Color.fromRGBO(29, 161, 242, 1),
-                    containerColor: Color.fromRGBO(29, 161, 242, 20),
-                  ),
-                  SizedBox(width: 35),
-                  OAuth(
-                    imagePath: 'assets/images/googlelogo.png', //OAuth Google
-                    borderColor: Colors.white,
-                    containerColor: Colors.white,
-                  ),
-                ]),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                OAuth(
+                  imagePath: 'assets/images/discordlogo.png', // OAuth Discord
+                  borderColor: Color.fromRGBO(88, 101, 242, 1),
+                  containerColor: Color.fromRGBO(88, 101, 242, 1),
+                ),
+                SizedBox(width: 35),
+                OAuth(
+                  imagePath: 'assets/images/twitterlogo.png', // OAuth Twitter
+                  borderColor: Color.fromRGBO(29, 161, 242, 1),
+                  containerColor: Color.fromRGBO(29, 161, 242, 20),
+                ),
+                SizedBox(width: 35),
+                OAuth(
+                  imagePath: 'assets/images/googlelogo.png', // OAuth Google
+                  borderColor: Colors.white,
+                  containerColor: Colors.white,
+                ),
+              ],
+            ),
             const SizedBox(height: 25),
             Row(
               children: <Widget>[
                 Expanded(
                   child: Container(
-                      margin: const EdgeInsets.only(right: 25.0),
-                      child: const Divider(
-                        color: AppColor.secondaryColor,
-                        height: 36,
-                      )),
+                    margin: const EdgeInsets.only(right: 25.0),
+                    child: const Divider(
+                      color: AppColor.secondaryColor,
+                      height: 36,
+                    ),
+                  ),
                 ),
                 const Text("ou", style: TextStyle(color: AppColor.textColor)),
                 Expanded(
                   child: Container(
-                      margin: const EdgeInsets.only(left: 25.0),
-                      child: const Divider(
-                        color: AppColor.secondaryColor,
-                        height: 36,
-                      )),
+                    margin: const EdgeInsets.only(left: 25.0),
+                    child: const Divider(
+                      color: AppColor.secondaryColor,
+                      height: 36,
+                    ),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             FormTextField(
               keyboardType: TextInputType.text,
               labelText: "Username",
               controller: usernameInputController,
               hintText: "ChampionMaster",
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             FormTextField(
               keyboardType: TextInputType.emailAddress,
               labelText: "Email",
               controller: emailInputController,
               hintText: "champion@email.com",
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             FormTextField(
               keyboardType: TextInputType.text,
               labelText: "Senha",
@@ -113,9 +133,7 @@ class _ViewSignupState extends State<ViewSignup> {
               hintText: "Digite sua senha",
               passwordField: true,
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             FormTextField(
               keyboardType: TextInputType.text,
               labelText: "Confirme sua Senha",
@@ -123,55 +141,55 @@ class _ViewSignupState extends State<ViewSignup> {
               hintText: "Digite a sua senha novamente",
               passwordField: true,
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             CheckboxListTile(
               title: const Text(
                 "Aceito os termos de uso",
                 style: TextStyle(color: AppColor.textColor),
               ),
-              value: termsCheckbox,
+              value: _termsCheckbox,
               onChanged: (value) {
                 setState(() {
-                  termsCheckbox = !termsCheckbox;
+                  _termsCheckbox = !_termsCheckbox;
                 });
               },
               activeColor: AppColor.accentColor,
               controlAffinity: ListTileControlAffinity.leading,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () => signupController.submitSignup(
-                    context,
-                    usernameInputController,
-                    emailInputController,
-                    passwordInputController,
-                    confirmPasswordInputController,
-                    termsCheckbox),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.primaryColor,
-                    foregroundColor: AppColor.textColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+            const SizedBox(height: 20),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: _submitSignup,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.primaryColor,
+                      foregroundColor: AppColor.textColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: const EdgeInsets.only(
+                        left: 70,
+                        right: 70,
+                        top: 20,
+                        bottom: 20,
+                      ),
                     ),
-                    padding: const EdgeInsets.only(
-                        left: 70, right: 70, top: 20, bottom: 20)),
-                child: const Text("CRIAR UMA CONTA")),
-            const SizedBox(
-              height: 20,
-            ),
+                    child: const Text("CRIAR UMA CONTA"),
+                  ),
+            const SizedBox(height: 20),
             Center(
-                child: RichText(
-              text: TextSpan(
+              child: RichText(
+                text: TextSpan(
                   text: 'Já tenho uma conta',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => signupController.pushLogin(context),
                   style: const TextStyle(
-                      fontSize: 11, color: AppColor.accentColor)),
-            )),
+                    fontSize: 11,
+                    color: AppColor.accentColor,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
