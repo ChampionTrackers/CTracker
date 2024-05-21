@@ -31,7 +31,7 @@ class TrackerDrawer extends StatelessWidget {
 
             if (!context.mounted) return;
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => ViewLogin()));
+                context, MaterialPageRoute(builder: (context) => const ViewLogin()));
           }
         ),
       ]),

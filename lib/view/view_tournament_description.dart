@@ -2,7 +2,7 @@ import 'package:ctracker/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ViewTournament extends StatelessWidget {
-  const ViewTournament({Key? key});
+  const ViewTournament({super.key});
 
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Informações'),
@@ -371,7 +371,7 @@ class ViewTournament extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const Padding(
-                          padding: const EdgeInsets.all(0),
+                          padding: EdgeInsets.all(0),
                           child: Text(
                             'Acompanhe o campeonato aqui',
                             style: TextStyle(

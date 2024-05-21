@@ -58,12 +58,12 @@ class ViewCard extends StatelessWidget {
 ) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0), // Adicionando margem apenas na parte superior
-    child: Container(
+    child: SizedBox(
       height: 280,
       child: Card(
         margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
         color: const Color.fromRGBO(46, 56, 86, 1),
-        child: Container(
+        child: SizedBox(
           height: 280, // Altura desejada para o cartão
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
