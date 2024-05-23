@@ -15,7 +15,7 @@ class ProfileController {
 
     // Fetch profile data from API
     var res = await http.get(
-        Uri.parse("https://ctracker-server.onrender.com/v1/users"),
+        Uri.parse("https://ctracker-server.onrender.com/v1/profile"),
         headers: {
           "Content-Type": "application/json",
           'Accept': 'application/json',

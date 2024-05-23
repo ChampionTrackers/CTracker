@@ -13,7 +13,7 @@ class LoginController {
 
   Future<String> _attemptLogIn(String email, String password) async {
     var res = await http.post(
-        Uri.parse("https://ctracker-server.onrender.com/v1/login"),
+        Uri.parse("https://ctracker-server.onrender.com/v1/sessions/password"),
         headers: {"Content-Type": "application/json"},
         body: json.encode({
           "email": email,
