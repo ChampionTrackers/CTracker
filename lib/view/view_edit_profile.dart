@@ -26,6 +26,50 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
 
   late Future<User> userModel;
 
+  bool _isInfoUpdateLoading = false;
+  bool _isPasswordUpdateLoading = false;
+
+  void submitPasswordUpdate() async {
+    setState(() {
+      _isPasswordUpdateLoading = true;
+    });
+
+    try {
+      await _editProfileController.updatePassword(
+          context,
+          oldPasswordInputController,
+          newPasswordInputController,
+          confirmNewPasswordInputController);
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isPasswordUpdateLoading = false;
+        });
+      }
+    }
+  }
+
+  void submitInfoUpdate() async {
+    setState(() {
+      _isInfoUpdateLoading = true;
+    });
+
+    try {
+      await _editProfileController.updateProfile(
+          context,
+          nameInputController,
+          nicknameInputController,
+          emailInputController,
+          confirmUpdatePasswordInputController);
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isInfoUpdateLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -66,9 +110,9 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
               );
             } else if (snapshot.hasData) {
               final user = snapshot.data!;
-              nameInputController.text = user.name!;
-              nicknameInputController.text = user.nickname!;
-              emailInputController.text = user.email!;
+              // nameInputController.text = user.name!;
+              // nicknameInputController.text = user.nickname!;
+              // emailInputController.text = user.email!;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -87,6 +131,7 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
                     FormTextField(
                       labelText: "Nome",
                       controller: nameInputController,
+                      hintText: user.name!,
                     ),
                     const SizedBox(
                       height: 20,
@@ -94,6 +139,7 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
                     FormTextField(
                       labelText: "Username",
                       controller: nicknameInputController,
+                      hintText: user.nickname!,
                     ),
                     const SizedBox(
                       height: 20,
@@ -101,6 +147,7 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
                     FormTextField(
                       labelText: "Email",
                       controller: emailInputController,
+                      hintText: user.email!,
                     ),
                     const SizedBox(
                       height: 30,
@@ -120,20 +167,23 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
                     const SizedBox(
                       height: 20,
                     ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 35),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          backgroundColor: AppColor.primaryColor,
-                        ),
-                        child: const Text(
-                          "CONFIRMAR",
-                          style: TextStyle(
-                              color: AppColor.textColor,
-                              fontWeight: FontWeight.w600),
-                        )),
+                    _isInfoUpdateLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: submitInfoUpdate,
+                            style: ElevatedButton.styleFrom(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 35),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              backgroundColor: AppColor.primaryColor,
+                            ),
+                            child: const Text(
+                              "CONFIRMAR",
+                              style: TextStyle(
+                                  color: AppColor.textColor,
+                                  fontWeight: FontWeight.w600),
+                            )),
                     const Divider(
                       color: AppColor.secondaryColor,
                       height: 50,
@@ -150,7 +200,7 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
                     ),
                     FormTextField(
                       labelText: "Senha Atual",
-                      controller: newPasswordInputController,
+                      controller: oldPasswordInputController,
                       passwordField: true,
                     ),
                     const SizedBox(
@@ -172,20 +222,23 @@ class _ViewEditProfileState extends State<ViewEditProfile> {
                     const SizedBox(
                       height: 20,
                     ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 35),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          backgroundColor: AppColor.primaryColor,
-                        ),
-                        child: const Text(
-                          "TROCAR",
-                          style: TextStyle(
-                              color: AppColor.textColor,
-                              fontWeight: FontWeight.w600),
-                        )),
+                    _isPasswordUpdateLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: submitPasswordUpdate,
+                            style: ElevatedButton.styleFrom(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 35),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              backgroundColor: AppColor.primaryColor,
+                            ),
+                            child: const Text(
+                              "TROCAR",
+                              style: TextStyle(
+                                  color: AppColor.textColor,
+                                  fontWeight: FontWeight.w600),
+                            )),
                   ],
                 ),
               );
