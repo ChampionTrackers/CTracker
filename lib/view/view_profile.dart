@@ -554,7 +554,6 @@ class _ViewProfileState extends State<ViewProfile> {
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               child: Wrap(
-                                
                                 children: [
                                   Container(
                                     //amigo1
@@ -607,7 +606,6 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   const SizedBox(
                                       width: 10), // Espaço entre os Containers
-                                 
                                 ],
                               ),
                             ),

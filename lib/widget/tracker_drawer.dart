@@ -19,21 +19,21 @@ class TrackerDrawer extends StatelessWidget {
           ),
         ),
         const ListTile(
-          leading: Icon(Icons.info_outline, color: AppColor.textColor),
-          title: Text("Sobre nós", style: TextStyle(color: AppColor.textColor))
-        ),
+            leading: Icon(Icons.info_outline, color: AppColor.textColor),
+            title:
+                Text("Sobre nós", style: TextStyle(color: AppColor.textColor))),
         ListTile(
-          leading: const Icon(Icons.logout, color: AppColor.textColor),
-          title: const Text("Log out", style: TextStyle(color: AppColor.textColor)),
-          onTap: () async {
-            FlutterSecureStorage storage = const FlutterSecureStorage();
-            await storage.deleteAll();
+            leading: const Icon(Icons.logout, color: AppColor.textColor),
+            title: const Text("Log out",
+                style: TextStyle(color: AppColor.textColor)),
+            onTap: () async {
+              FlutterSecureStorage storage = const FlutterSecureStorage();
+              await storage.deleteAll();
 
-            if (!context.mounted) return;
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => const ViewLogin()));
-          }
-        ),
+              if (!context.mounted) return;
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ViewLogin()));
+            }),
       ]),
     );
   }

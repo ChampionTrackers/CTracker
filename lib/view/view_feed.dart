@@ -50,23 +50,17 @@ class ViewFeed extends StatelessWidget {
                             teamName: "Blue Tigers",
                             championshipName: "Sword Fighters",
                             coins: 20),
-                        const Divider(
-                          color: AppColor.accentColor
-                        ),
+                        const Divider(color: AppColor.accentColor),
                         _buildGuessRow(
                             teamName: "Death Lock",
                             championshipName: "Jogo da Velha",
                             coins: 15),
-                        const Divider(
-                          color: AppColor.accentColor
-                        ),
+                        const Divider(color: AppColor.accentColor),
                         _buildGuessRow(
                             teamName: "Equipe Foguete",
                             championshipName: "Bolinha de Gude Ultimate",
                             coins: 7),
-                        const Divider(
-                          color: AppColor.accentColor
-                        ),
+                        const Divider(color: AppColor.accentColor),
                         _buildGuessRow(
                             teamName: "Destroyers2000",
                             championshipName: "Worms W.M.D. Championship",
@@ -198,84 +192,78 @@ class ViewFeed extends StatelessWidget {
           ),
         ]),
         TableRow(children: [
-          TableCell(child: 
-            Container(
-              padding: const EdgeInsets.all(3.0),
-              color: AppColor.backgroundColor,
-              alignment: Alignment.center,
-              child: const Icon(
-                Icons.monitor,
+          TableCell(
+              child: Container(
+            padding: const EdgeInsets.all(3.0),
+            color: AppColor.backgroundColor,
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.monitor,
+              color: AppColor.textColor,
+              size: 20,
+            ),
+          )),
+          TableCell(
+              child: Container(
+            padding: const EdgeInsets.all(3.0),
+            color: AppColor.backgroundColor,
+            alignment: Alignment.center,
+            child: const Text(
+              'Sword Fighters',
+              style: TextStyle(
                 color: AppColor.textColor,
-                size: 20,
               ),
-            )
-          ),
-          TableCell(child: 
-            Container(
-              padding: const EdgeInsets.all(3.0),
-              color: AppColor.backgroundColor,
-              alignment: Alignment.center,
-              child: const Text(
-                'Sword Fighters',
-                style: TextStyle(
-                  color: AppColor.textColor,
-                ),
+            ),
+          )),
+          TableCell(
+              child: Container(
+            padding: const EdgeInsets.all(3.0),
+            color: AppColor.backgroundColor,
+            alignment: Alignment.center,
+            child: const Text(
+              'ATIVO',
+              style: TextStyle(
+                color: AppColor.secondAccentColor,
               ),
-            )
-          ),
-          TableCell(child: 
-            Container(
-              padding: const EdgeInsets.all(3.0),
-              color: AppColor.backgroundColor,
-              alignment: Alignment.center,
-              child: const Text(
-                'ATIVO',
-                style: TextStyle(
-                  color: AppColor.secondAccentColor,
-                ),
-              ),
-            )
-          ),
+            ),
+          )),
         ]),
         TableRow(children: [
-          TableCell(child: 
-            Container(
-              padding: const EdgeInsets.all(3.0),
-              color: AppColor.tertiaryColor,
-              alignment: Alignment.center,
-              child: const Icon(
-                Icons.directions_run,
+          TableCell(
+              child: Container(
+            padding: const EdgeInsets.all(3.0),
+            color: AppColor.tertiaryColor,
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.directions_run,
+              color: AppColor.textColor,
+              size: 20,
+            ),
+          )),
+          TableCell(
+              child: Container(
+            padding: const EdgeInsets.all(3.0),
+            color: AppColor.tertiaryColor,
+            alignment: Alignment.center,
+            child: const Text(
+              'Campeões de Maringá',
+              style: TextStyle(
                 color: AppColor.textColor,
-                size: 20,
               ),
-            )
-          ),
-          TableCell(child: 
-            Container(
-              padding: const EdgeInsets.all(3.0),
-              color: AppColor.tertiaryColor,
-              alignment: Alignment.center,
-              child: const Text(
-                'Campeões de Maringá',
-                style: TextStyle(
-                  color: AppColor.textColor,
-                ),
+            ),
+          )),
+          TableCell(
+              child: Container(
+            padding: const EdgeInsets.all(3.0),
+            color: AppColor.tertiaryColor,
+            alignment: Alignment.center,
+            child: const Text(
+              'INATIVO',
+              style: TextStyle(
+                color: AppColor.secondAccentColor,
               ),
-            )
-          ),
-          TableCell(child: 
-            Container(
-              padding: const EdgeInsets.all(3.0),
-              color: AppColor.tertiaryColor,
-              alignment: Alignment.center,
-              child: const Text(
-                'INATIVO',
-                style: TextStyle(
-                  color: AppColor.secondAccentColor,
-                ),
-              ),
-            )
-          ),
+            ),
+          )),
         ]),
       ],
     );
