@@ -1,11 +1,11 @@
-name: Dart
+name: Dart Linting
 
 on:
   push:
     branches: [ '**' ]
 
 jobs:
-  build:
+  lint_check:
     runs-on: ubuntu-latest
 
     steps:
