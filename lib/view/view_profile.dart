@@ -1,6 +1,7 @@
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/controller/controller_profile.dart';
 import 'package:ctracker/model/user_model.dart';
+import 'package:ctracker/view/view_edit_profile.dart';
 import 'package:ctracker/widget/bottom_navigation.dart';
 import 'package:ctracker/widget/tracker_appbar.dart';
 import 'package:ctracker/widget/tracker_drawer.dart';
@@ -53,19 +54,14 @@ class _ViewProfileState extends State<ViewProfile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      ClipRect(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 40, bottom: 20),
-                          height: 200,
-                          width: 200,
-                          decoration: BoxDecoration(
-                            color: AppColor.tertiaryColor,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Image.network(
-                            snapshot.data!.picture ?? "",
-                            fit: BoxFit.cover,
-                          ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewEditProfile()));
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(snapshot.data?.picture ?? "https://api.dicebear.com/8.x/lorelei/png?seed=${snapshot.data?.nickname}"),
+                          radius: 100,
+                          backgroundColor: AppColor.tertiaryColor,
                         ),
                       ),
                       Text(snapshot.data?.name ?? "Erro",

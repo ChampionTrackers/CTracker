@@ -8,7 +8,7 @@ class SignupController {
   Future<int> _attemptSignUp(
       String email, String username, String password) async {
     var res = await http.post(
-        Uri.parse("https://ctracker-server.onrender.com/v1/signup"),
+        Uri.parse("https://ctracker-server.onrender.com/v1/users"),
         headers: {"Content-Type": "application/json"},
         body: json.encode({
           "email": email,
