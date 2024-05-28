@@ -31,7 +31,8 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewHome()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ViewHome()));
             },
           ),
           IconButton(
@@ -41,7 +42,8 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewProfile()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ViewProfile()));
             },
           ),
           const Opacity(
@@ -58,7 +60,8 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewFeed()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ViewFeed()));
             },
           ),
           IconButton(
@@ -68,7 +71,8 @@ class _BottomNavigation extends State<BottomNavigation> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ViewShop()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ViewShop()));
             },
           ),
         ],

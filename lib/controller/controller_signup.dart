@@ -49,7 +49,7 @@ class SignupController {
       snackBar(context, "Conta criada com sucesso");
 
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => ViewLogin()));
+          context, MaterialPageRoute(builder: (context) => const ViewLogin()));
     } else if (res == 409) {
       if (!context.mounted) return;
       snackBar(context, "Usuário já existe");

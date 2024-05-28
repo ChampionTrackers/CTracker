@@ -41,8 +41,8 @@ class LoginController {
       if (kDebugMode) print("JWT: $jwt");
 
       if (!context.mounted) return;
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const ViewHome()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const ViewHome()));
     } catch (error) {
       snackBar(context, "Email ou Senha incorretos");
     }
