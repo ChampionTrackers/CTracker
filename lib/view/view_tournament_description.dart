@@ -90,7 +90,6 @@ class ViewTournament extends StatelessWidget {
                       TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   tabs: myTabs,
                   dividerColor: AppColor.tertiaryColor,
-                  
                 ),
               ],
             ),
@@ -611,6 +610,11 @@ class ViewTournament extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Table(
+              columnWidths: const {
+                0: FlexColumnWidth(1),
+                1: FlexColumnWidth(2),
+                2: FlexColumnWidth(1),
+              },
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: [
                 TableRow(
