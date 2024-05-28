@@ -17,11 +17,11 @@ class User {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['email'] = email;
-    data['name'] = name;
-    data['nickname'] = nickname;
-    data['picture'] = picture;
-    data['score'] = score;
+    if (email != "") data['email'] = email;
+    if (name != "") data['name'] = name;
+    if (nickname != "") data['nickname'] = nickname;
+    if (picture != null) data['picture'] = picture;
+    if (score != null) data['score'] = score;
     return data;
   }
 }

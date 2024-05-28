@@ -11,7 +11,6 @@ class ProfileController {
 
   Future<User> fetchProfile() async {
     var jwt = await verifyJwt();
-    if (kDebugMode) print("JWT: $jwt");
 
     // Fetch profile data from API
     var res = await http.get(
