@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
 
 class ViewTournament extends StatelessWidget {
-  const ViewTournament({Key? key});
+  const ViewTournament({super.key});
 
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Informações'),
@@ -502,6 +502,7 @@ class ViewTournament extends StatelessWidget {
       ),
     );
   }
+
   Widget buildPartidasAntigasBox() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -602,147 +603,148 @@ class ViewTournament extends StatelessWidget {
       ),
     );
   }
-  Widget buildPosicoesContent() {
-  return SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Table(
-            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-            children: [
-              TableRow(
-                children: [
-                  TableCell(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Posição',
-                        style: TextStyle(
-                          color: AppColor.textColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  TableCell(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Equipe',
-                        style: TextStyle(
-                          color: AppColor.textColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  TableCell(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'VDE',
-                        style: TextStyle(
-                          color: AppColor.textColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const TableRow(
-                children: [
-                  SizedBox(height: 15), // Espaçamento entre as linhas
-                  SizedBox(height: 15),
-                  SizedBox(height: 15),
-                ],
-              ),
-              buildTableRow('1°', 'The Mystics', '3.5'),
-              const TableRow(
-                children: [
-                  SizedBox(height: 15), // Espaçamento entre as linhas
-                  SizedBox(height: 15),
-                  SizedBox(height: 15),
-                ],
-              ),
-              buildTableRow('2°', 'The Dogs', '3.5'),
-              const TableRow(
-                children: [
-                  SizedBox(height: 15), // Espaçamento entre as linhas
-                  SizedBox(height: 15),
-                  SizedBox(height: 15),
-                ],
-              ),
-              buildTableRow('3°', 'The Sailors', '3.5'),
-              const TableRow(
-                children: [
-                  SizedBox(height: 15),
-                  SizedBox(height: 15),
-                  SizedBox(height: 15),
-                ],
-              ),
-              buildTableRow('4°', 'Loren Ipsum', '3.5'),
-            ],
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
-TableRow buildTableRow(String position, String team, String score) {
-  return TableRow(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(5),
-      color: AppColor.tertiaryColor // Cor de fundo para as linhas da tabela
-    ),
-    children: [
-      TableCell(
-        child: Container(
-          alignment: Alignment.center,
-          child: Text(
-            position,
-            style: const TextStyle(
-              color: AppColor.textColor,
-              fontSize: 16,
+  Widget buildPosicoesContent() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: [
+                TableRow(
+                  children: [
+                    TableCell(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Posição',
+                          style: TextStyle(
+                            color: AppColor.textColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Equipe',
+                          style: TextStyle(
+                            color: AppColor.textColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'VDE',
+                          style: TextStyle(
+                            color: AppColor.textColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const TableRow(
+                  children: [
+                    SizedBox(height: 15), // Espaçamento entre as linhas
+                    SizedBox(height: 15),
+                    SizedBox(height: 15),
+                  ],
+                ),
+                buildTableRow('1°', 'The Mystics', '3.5'),
+                const TableRow(
+                  children: [
+                    SizedBox(height: 15), // Espaçamento entre as linhas
+                    SizedBox(height: 15),
+                    SizedBox(height: 15),
+                  ],
+                ),
+                buildTableRow('2°', 'The Dogs', '3.5'),
+                const TableRow(
+                  children: [
+                    SizedBox(height: 15), // Espaçamento entre as linhas
+                    SizedBox(height: 15),
+                    SizedBox(height: 15),
+                  ],
+                ),
+                buildTableRow('3°', 'The Sailors', '3.5'),
+                const TableRow(
+                  children: [
+                    SizedBox(height: 15),
+                    SizedBox(height: 15),
+                    SizedBox(height: 15),
+                  ],
+                ),
+                buildTableRow('4°', 'Loren Ipsum', '3.5'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  TableRow buildTableRow(String position, String team, String score) {
+    return TableRow(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: AppColor.tertiaryColor // Cor de fundo para as linhas da tabela
+          ),
+      children: [
+        TableCell(
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(
+              position,
+              style: const TextStyle(
+                color: AppColor.textColor,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
-      ),
-      TableCell(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          child: Text(
-            team,
-            style: const TextStyle(
-              color: AppColor.textColor,
-              fontSize: 16,
+        TableCell(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            alignment: Alignment.center,
+            child: Text(
+              team,
+              style: const TextStyle(
+                color: AppColor.textColor,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
-      ),
-      TableCell(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          child: Text(
-            score,
-            style: const TextStyle(
-              color: AppColor.textColor,
-              fontSize: 16,
+        TableCell(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            alignment: Alignment.center,
+            child: Text(
+              score,
+              style: const TextStyle(
+                color: AppColor.textColor,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
-      ),
-    ],
-  );
-}
+      ],
+    );
+  }
 }
