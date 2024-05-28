@@ -12,9 +12,7 @@ class ViewTournament extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
+    return DefaultTabController(
         length: myTabs.length,
         child: Scaffold(
           backgroundColor: AppColor.backgroundColor,
@@ -108,8 +106,7 @@ class ViewTournament extends StatelessWidget {
             }).toList(),
           ),
         ),
-      ),
-    );
+      );
   }
 
   Widget buildInformacoesContent() {
