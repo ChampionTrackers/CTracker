@@ -4,7 +4,7 @@ class OAuth extends StatelessWidget {
   final String imagePath;
   final Color borderColor;
   final Color containerColor;
-  
+
   const OAuth({
     super.key,
     required this.imagePath,
@@ -23,7 +23,8 @@ class OAuth extends StatelessWidget {
       ),
       child: Image.asset(
         imagePath,
-        height: 18,),
+        height: 18,
+      ),
     );
   }
 }

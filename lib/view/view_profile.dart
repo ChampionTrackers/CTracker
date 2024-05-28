@@ -56,10 +56,16 @@ class _ViewProfileState extends State<ViewProfile> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewEditProfile()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ViewEditProfile()));
                         },
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(snapshot.data?.picture ?? "https://api.dicebear.com/8.x/lorelei/png?seed=${snapshot.data?.nickname}"),
+                          backgroundImage: NetworkImage(snapshot
+                                  .data?.picture ??
+                              "https://api.dicebear.com/8.x/lorelei/png?seed=${snapshot.data?.nickname}"),
                           radius: 100,
                           backgroundColor: AppColor.tertiaryColor,
                         ),
@@ -550,7 +556,6 @@ class _ViewProfileState extends State<ViewProfile> {
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               child: Wrap(
-                                
                                 children: [
                                   Container(
                                     //amigo1
@@ -603,7 +608,6 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   const SizedBox(
                                       width: 10), // Espaço entre os Containers
-                                 
                                 ],
                               ),
                             ),

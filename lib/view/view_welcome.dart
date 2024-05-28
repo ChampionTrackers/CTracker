@@ -120,7 +120,7 @@ class _ViewWelcomeState extends State<ViewWelcome> {
                     foregroundColor: Colors.white, // Cor do texto do botão
                     shape: RoundedRectangleBorder(
                       borderRadius:
-                        BorderRadius.circular(20.0), // Borda do botão
+                          BorderRadius.circular(20.0), // Borda do botão
                     ),
                   ),
                   child: const Padding(

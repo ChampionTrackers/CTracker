@@ -37,7 +37,7 @@ class Main extends StatelessWidget {
         if (snapshot.data == true) {
           return const ViewHome();
         } else {
-          return ViewLogin();
+          return const ViewLogin();
         }
       },
     );

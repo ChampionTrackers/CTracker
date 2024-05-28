@@ -9,20 +9,20 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(splash:
-     Column(
+    return AnimatedSplashScreen(
+      splash: Column(
         children: [
           SizedBox(
             width: 100, // largura da imagem de animação
             height: 100, // altura da imagem de animação
-            child: LottieBuilder.asset(
-              "assets/images/lottie/trofeupiscando.json"             
-              ),
+            child:
+                LottieBuilder.asset("assets/images/lottie/trofeupiscando.json"),
           )
         ],
-     ), nextScreen: ViewLogin(),
-     splashIconSize: 100,
-        backgroundColor: AppColor.backgroundColor,
-     );
+      ),
+      nextScreen: const ViewLogin(),
+      splashIconSize: 100,
+      backgroundColor: AppColor.backgroundColor,
+    );
   }
 }
