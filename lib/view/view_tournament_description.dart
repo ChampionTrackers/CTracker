@@ -13,100 +13,102 @@ class ViewTournament extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: myTabs.length,
-        child: Scaffold(
-          backgroundColor: AppColor.backgroundColor,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(300),
-            child: AppBar(
-              backgroundColor: AppColor.tertiaryColor,
-              flexibleSpace: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: 150,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/Sword.png'),
-                        fit: BoxFit.cover,
+      length: myTabs.length,
+      child: Scaffold(
+        backgroundColor: AppColor.backgroundColor,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(280),
+          child: AppBar(
+            backgroundColor: AppColor.tertiaryColor,
+            flexibleSpace: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 150,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/Sword.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                        child: Text(
+                          'Sword Fighters',
+                          style: TextStyle(
+                            color: AppColor.textColor,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                          child: Text(
-                            'Sword Fighters',
-                            style: TextStyle(
-                              color: AppColor.textColor,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                  backgroundColor: AppColor.secondaryColor,
-                                  child: Text('GT')),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Organizado por',
-                                      style: TextStyle(
-                                          color: AppColor.textColor,
-                                          fontSize: 16),
-                                    ),
-                                    Text(
-                                      'Fenix',
-                                      style: TextStyle(
-                                          color: AppColor.accentColor,
-                                          fontSize: 16),
-                                    ),
-                                  ],
-                                ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                                backgroundColor: AppColor.secondaryColor,
+                                child: Text('GT')),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Organizado por',
+                                    style: TextStyle(
+                                        color: AppColor.textColor,
+                                        fontSize: 16),
+                                  ),
+                                  Text(
+                                    'Fenix',
+                                    style: TextStyle(
+                                        color: AppColor.accentColor,
+                                        fontSize: 16),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const TabBar(
-                    unselectedLabelColor: Color.fromARGB(113, 239, 239, 239),
-                    labelColor: AppColor.textColor,
-                    indicatorColor: AppColor.secondAccentColor,
-                    labelStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    tabs: myTabs,
-                  ),
-                ],
-              ),
+                ),
+                const TabBar(
+                  unselectedLabelColor: Color.fromARGB(113, 239, 239, 239),
+                  labelColor: AppColor.textColor,
+                  indicatorColor: AppColor.secondAccentColor,
+                  labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  tabs: myTabs,
+                  dividerColor: AppColor.tertiaryColor,
+                  
+                ),
+              ],
             ),
           ),
-          body: TabBarView(
-            children: myTabs.map((Tab tab) {
-              if (tab.text == 'Informações') {
-                return buildInformacoesContent();
-              } else if (tab.text == 'Partidas') {
-                return buildPartidasContent();
-              } else {
-                return buildPosicoesContent();
-              }
-            }).toList(),
-          ),
         ),
-      );
+        body: TabBarView(
+          children: myTabs.map((Tab tab) {
+            if (tab.text == 'Informações') {
+              return buildInformacoesContent();
+            } else if (tab.text == 'Partidas') {
+              return buildPartidasContent();
+            } else {
+              return buildPosicoesContent();
+            }
+          }).toList(),
+        ),
+      ),
+    );
   }
 
   Widget buildInformacoesContent() {
