@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
+import 'package:flutter/material.dart';
 
 class ViewTournament extends StatelessWidget {
   const ViewTournament({super.key});
@@ -27,7 +27,7 @@ class ViewTournament extends StatelessWidget {
                     height: 150,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/sword.png'),
+                        image: AssetImage('assets/images/Sword.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
