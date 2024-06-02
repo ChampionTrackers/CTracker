@@ -9,7 +9,8 @@ class TrackerCard extends StatelessWidget {
     required this.game,
     required this.tournamentType,
     required this.date,
-    required this.participants, required this.onTap,
+    required this.participants,
+    required this.onTap,
   });
 
   final String imagePath;
@@ -63,7 +64,8 @@ class TrackerCard extends StatelessWidget {
                         const SizedBox(height: 10),
                         Row(
                           children: [
-                            const Icon(Icons.gamepad, color: AppColor.textColor),
+                            const Icon(Icons.gamepad,
+                                color: AppColor.textColor),
                             const SizedBox(width: 5),
                             Text(game,
                                 style:

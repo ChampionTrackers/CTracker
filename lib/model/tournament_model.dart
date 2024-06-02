@@ -14,7 +14,6 @@ class Tournament {
   int? teamsAmount;
   List<Team>? teams;
 
-
   Tournament(
       {this.id,
       this.name,
@@ -26,7 +25,8 @@ class Tournament {
       this.createdAt,
       this.teamsAmount});
 
-  Tournament.fromJson(Map<String, dynamic> json, {User? owner, List<Team>? teams}) {
+  Tournament.fromJson(Map<String, dynamic> json,
+      {User? owner, List<Team>? teams}) {
     id = json['id'];
     name = json['name'];
     owner = json['owner'];
@@ -34,7 +34,8 @@ class Tournament {
     picture = json['picture'];
     type = json['type'];
     game = json['game'];
-    createdAt = DateFormat('dd/MM/yyyy').format(DateTime.parse(json['createdAt']));
+    createdAt =
+        DateFormat('dd/MM/yyyy').format(DateTime.parse(json['createdAt']));
     teamsAmount = json['teamsAmount'];
     teams = teams;
     owner = owner;
