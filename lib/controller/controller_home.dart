@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:ctracker/model/championship_model.dart';
+import 'package:ctracker/model/tournament_model.dart';
 import 'package:http/http.dart' as http;
 
 class HomeController {
-  Future<List<Championship>> fetchChampionships() async {
+  Future<List<Tournament>> fetchTournament() async {
     final queryParams = {
       "page": "0",
       "pageSize": "5",
@@ -23,7 +23,7 @@ class HomeController {
 
     if (res.statusCode == 200) {
       List body = json.decode(res.body);
-      return body.map((item) => Championship.fromJson(item)).toList();
+      return body.map((item) => Tournament.fromJson(item)).toList();
     } else {
       throw Exception("Failed to load championships");
     }

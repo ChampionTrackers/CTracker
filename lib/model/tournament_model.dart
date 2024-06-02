@@ -2,7 +2,7 @@ import 'package:ctracker/model/team_model.dart';
 import 'package:ctracker/model/user_model.dart';
 import 'package:intl/intl.dart';
 
-class Championship {
+class Tournament {
   int? id;
   String? name;
   User? owner;
@@ -15,7 +15,7 @@ class Championship {
   List<Team>? teams;
 
 
-  Championship(
+  Tournament(
       {this.id,
       this.name,
       this.owner,
@@ -26,7 +26,7 @@ class Championship {
       this.createdAt,
       this.teamsAmount});
 
-  Championship.fromJson(Map<String, dynamic> json, {User? owner, List<Team>? teams}) {
+  Tournament.fromJson(Map<String, dynamic> json, {User? owner, List<Team>? teams}) {
     id = json['id'];
     name = json['name'];
     owner = json['owner'];

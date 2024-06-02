@@ -1,6 +1,6 @@
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/controller/controller_home.dart';
-import 'package:ctracker/model/championship_model.dart';
+import 'package:ctracker/model/tournament_model.dart';
 import 'package:ctracker/view/view_tournament_description.dart';
 import 'package:ctracker/widget/bottom_navigation.dart';
 import 'package:ctracker/widget/tracker_appbar.dart';
@@ -17,13 +17,13 @@ class ViewHome extends StatefulWidget {
 }
 
 class _ViewHomeState extends State<ViewHome> {
-  late Future<List<Championship>> futureChampionships;
+  late Future<List<Tournament>> futureTournaments;
   final controller = HomeController();
 
   @override
   void initState() {
     super.initState();
-    futureChampionships = controller.fetchChampionships();
+    futureTournaments = controller.fetchTournament();
   }
 
   @override
@@ -74,7 +74,7 @@ class _ViewHomeState extends State<ViewHome> {
               ),
             ),
             FutureBuilder(
-                future: futureChampionships,
+                future: futureTournaments,
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -109,29 +109,13 @@ class _ViewHomeState extends State<ViewHome> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ViewTournament(
-                                              championshipId:
+                                              tournamentId:
                                                   snapshot.data![index].id!)));
                                 },
                               );
                             }));
                   }
                 })),
-            // SizedBox(
-            //   height: 300,
-            //   child: ListView(
-            //     padding: const EdgeInsets.only(left: 20), // Margem à esquerda
-            //     scrollDirection: Axis.horizontal,
-            //     children: const [
-            //       TrackerCard(
-            //           imagePath: 'assets/images/CSGO.jpg',
-            //           title: 'Counter-Strike: GO',
-            //           game: 'CS:GO',
-            //           tournamentType: 'VIRTUAL',
-            //           date: '10/10/2021',
-            //           participants: '10'),
-            //     ],
-            //   ),
-            // ),
             const SizedBox(height: 60),
             const MyTable(),
           ],
