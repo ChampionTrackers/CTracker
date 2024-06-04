@@ -32,7 +32,7 @@ class TrackerCard extends StatelessWidget {
             8.0, 8.0, 8.0, 0), // Adicionando margem apenas na parte superior
         child: Card(
           margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-          color: const Color.fromRGBO(46, 56, 86, 1),
+          color: AppColor.tertiaryColor,
           child: SizedBox(
             width: 220,
             child: Column(
@@ -42,13 +42,16 @@ class TrackerCard extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 10),
                   height: 100,
                   width: 200,
-                  child: Image.network(
-                    imagePath,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      imagePath,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +68,7 @@ class TrackerCard extends StatelessWidget {
                         Row(
                           children: [
                             const Icon(Icons.gamepad,
-                                color: AppColor.textColor),
+                                color: AppColor.secondaryColor),
                             const SizedBox(width: 5),
                             Text(game,
                                 style:
@@ -76,7 +79,7 @@ class TrackerCard extends StatelessWidget {
                         Row(
                           children: [
                             const Icon(Icons.location_on,
-                                color: AppColor.textColor),
+                                color: AppColor.secondaryColor),
                             const SizedBox(width: 5),
                             Text(tournamentType,
                                 style:
@@ -87,7 +90,7 @@ class TrackerCard extends StatelessWidget {
                         Row(
                           children: [
                             const Icon(Icons.calendar_today,
-                                color: AppColor.textColor),
+                                color: AppColor.secondaryColor),
                             const SizedBox(width: 5),
                             Text('Data: $date',
                                 style:
@@ -97,7 +100,7 @@ class TrackerCard extends StatelessWidget {
                         const SizedBox(height: 5),
                         Row(
                           children: [
-                            const Icon(Icons.people, color: AppColor.textColor),
+                            const Icon(Icons.people, color: AppColor.secondaryColor),
                             const SizedBox(width: 5),
                             Text('Participantes: $participants',
                                 style:
