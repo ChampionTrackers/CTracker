@@ -1,43 +1,74 @@
-import 'package:ctracker/model/team_model.dart';
-import 'package:ctracker/model/user_model.dart';
 import 'package:intl/intl.dart';
 
 class Tournament {
   int? id;
   String? name;
-  User? owner;
-  String? description;
   String? picture;
+  String? description;
   String? type;
-  String? game;
   String? createdAt;
   int? teamsAmount;
-  List<Team>? teams;
+  String? game;
+  Owner? owner;
 
   Tournament(
       {this.id,
       this.name,
-      this.owner,
-      this.description,
       this.picture,
+      this.description,
       this.type,
-      this.game,
       this.createdAt,
-      this.teamsAmount});
+      this.teamsAmount,
+      this.game,
+      this.owner});
 
-  Tournament.fromJson(Map<String, dynamic> json,
-      {User? owner, List<Team>? teams}) {
+  Tournament.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    owner = json['owner'];
-    description = json['description'];
     picture = json['picture'];
+    description = json['description'];
     type = json['type'];
-    game = json['game'];
-    createdAt =
-        DateFormat('dd/MM/yyyy').format(DateTime.parse(json['createdAt']));
+    createdAt = DateFormat('dd/MM/yyyy').format(DateTime.parse(json['createdAt']));
     teamsAmount = json['teamsAmount'];
-    teams = teams;
-    owner = owner;
+    game = json['game'];
+    owner = json['owner'] != null ? Owner.fromJson(json['owner']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['picture'] = picture;
+    data['description'] = description;
+    data['type'] = type;
+    data['createdAt'] = createdAt;
+    data['teamsAmount'] = teamsAmount;
+    data['game'] = game;
+    if (owner != null) {
+      data['owner'] = owner!.toJson();
+    }
+    return data;
+  }
+}
+
+class Owner {
+  int? id;
+  String? nickname;
+  String? picture;
+
+  Owner({this.id, this.nickname, this.picture});
+
+  Owner.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nickname = json['nickname'];
+    picture = json['picture'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['nickname'] = nickname;
+    data['picture'] = picture;
+    return data;
   }
 }
