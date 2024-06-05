@@ -100,7 +100,8 @@ class TrackerCard extends StatelessWidget {
                         const SizedBox(height: 5),
                         Row(
                           children: [
-                            const Icon(Icons.people, color: AppColor.secondaryColor),
+                            const Icon(Icons.people,
+                                color: AppColor.secondaryColor),
                             const SizedBox(width: 5),
                             Text('Participantes: $participants',
                                 style:

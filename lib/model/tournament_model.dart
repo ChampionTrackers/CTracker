@@ -28,7 +28,8 @@ class Tournament {
     picture = json['picture'];
     description = json['description'];
     type = json['type'];
-    createdAt = DateFormat('dd/MM/yyyy').format(DateTime.parse(json['createdAt']));
+    createdAt =
+        DateFormat('dd/MM/yyyy').format(DateTime.parse(json['createdAt']));
     teamsAmount = json['teamsAmount'];
     game = json['game'];
     owner = json['owner'] != null ? Owner.fromJson(json['owner']) : null;

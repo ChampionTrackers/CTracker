@@ -63,12 +63,12 @@ class _TrackerDrawerState extends State<TrackerDrawer> {
               backgroundColor: AppColor.tertiaryColor,
               child: ListView(padding: EdgeInsets.zero, children: <Widget>[
                 UserAccountsDrawerHeader(
-                  accountEmail: Text(snapshot.data?.email ?? "seu.ze@gmail.com"),
+                  accountEmail:
+                      Text(snapshot.data?.email ?? "seu.ze@gmail.com"),
                   accountName: Text(snapshot.data?.name ?? "Seu zé"),
                   currentAccountPicture: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      snapshot.data?.picture ?? "https://api.dicebear.com/8.x/lorelei/png?seed=seu.ze"
-                    ),
+                    backgroundImage: NetworkImage(snapshot.data?.picture ??
+                        "https://api.dicebear.com/8.x/lorelei/png?seed=seu.ze"),
                   ),
                 ),
                 const ListTile(

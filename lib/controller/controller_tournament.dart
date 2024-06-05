@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:ctracker/model/team_model.dart';
 import 'package:ctracker/model/tournament_model.dart';
-import 'package:ctracker/model/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class TournamentController {
