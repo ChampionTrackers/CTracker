@@ -1,0 +1,43 @@
+name: Build
+
+on: 
+  push:
+    tags:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --split-per-abi
+
+      - name: Create Release and Upload APK
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref }}
+          artifacts: "build/app/outputs/apk/release/*.apk"
+          token: ${{ secrets.TOKEN }}
+          generateReleaseNotes: true
