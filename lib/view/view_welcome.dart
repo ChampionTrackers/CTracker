@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/constants/texts.dart';
+import 'package:ctracker/view/view_signup.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ViewWelcome extends StatefulWidget {
   const ViewWelcome({super.key});
@@ -111,8 +113,11 @@ class _ViewWelcomeState extends State<ViewWelcome> {
                 margin: const EdgeInsets.only(bottom: 200.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Ação do botão na última página
-                    // print('Botão na última página pressionado');
+                    _markAsSeen();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ViewSignup()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
@@ -148,5 +153,10 @@ class _ViewWelcomeState extends State<ViewWelcome> {
         ],
       ),
     );
+  }
+
+  Future<void> _markAsSeen() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('welcome_screen_seen', true);
   }
 }
