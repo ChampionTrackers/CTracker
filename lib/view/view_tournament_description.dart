@@ -1,8 +1,13 @@
 import 'package:ctracker/constants/colors.dart';
+import 'package:ctracker/controller/controller_tournament.dart';
+import 'package:ctracker/model/team_model.dart';
+import 'package:ctracker/model/tournament_model.dart';
 import 'package:flutter/material.dart';
 
-class ViewTournament extends StatelessWidget {
-  const ViewTournament({super.key});
+class ViewTournament extends StatefulWidget {
+  final int tournamentId;
+
+  const ViewTournament({super.key, required this.tournamentId});
 
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Informações'),
@@ -11,67 +16,104 @@ class ViewTournament extends StatelessWidget {
   ];
 
   @override
+  State<ViewTournament> createState() => _ViewTournamentState();
+}
+
+class _ViewTournamentState extends State<ViewTournament> {
+  late Future<Tournament> futureTournament;
+  late Future<List<Team>> futureTeams;
+  TournamentController controller = TournamentController();
+  @override
+  void initState() {
+    futureTournament = controller.fetchTournamentDetails(widget.tournamentId);
+    futureTeams = controller.fetchTeams(widget.tournamentId);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: myTabs.length,
-      child: Scaffold(
-        backgroundColor: AppColor.backgroundColor,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(280),
-          child: AppBar(
-            backgroundColor: AppColor.tertiaryColor,
-            flexibleSpace: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  height: 150,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/Sword.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return FutureBuilder(
+      future: futureTournament,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Erro ao carregar campeonato',
+                style: TextStyle(color: AppColor.textColor)),
+          );
+        } else {
+          return DefaultTabController(
+            length: ViewTournament.myTabs.length,
+            child: Scaffold(
+              backgroundColor: AppColor.backgroundColor,
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(280),
+                child: AppBar(
+                  backgroundColor: AppColor.tertiaryColor,
+                  flexibleSpace: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                        child: Text(
-                          'Sword Fighters',
-                          style: TextStyle(
-                            color: AppColor.textColor,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
+                      Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(snapshot.data?.picture ??
+                                'https://placehold.co/600x400?text=No+Image'),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                                backgroundColor: AppColor.secondaryColor,
-                                child: Text('GT')),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                              child: Text(
+                                snapshot.data?.name ?? 'Sem nome',
+                                style: const TextStyle(
+                                  color: AppColor.textColor,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Organizado por',
-                                    style: TextStyle(
-                                        color: AppColor.textColor,
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    'Fenix',
-                                    style: TextStyle(
-                                        color: AppColor.accentColor,
-                                        fontSize: 16),
+                                  CircleAvatar(
+                                      backgroundImage: NetworkImage(snapshot
+                                              .data?.owner?.picture ??
+                                          'https://placehold.co/600x400?text=No+Image'),
+                                      backgroundColor: AppColor.secondaryColor),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Organizado por',
+                                          style: TextStyle(
+                                              color: AppColor.textColor,
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          snapshot.data?.owner?.nickname ??
+                                              'Sem nome',
+                                          style: const TextStyle(
+                                              color: AppColor.accentColor,
+                                              fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -79,38 +121,41 @@ class ViewTournament extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const TabBar(
+                        unselectedLabelColor:
+                            Color.fromARGB(113, 239, 239, 239),
+                        labelColor: AppColor.textColor,
+                        indicatorColor: AppColor.secondAccentColor,
+                        labelStyle: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                        tabs: ViewTournament.myTabs,
+                        dividerColor: AppColor.tertiaryColor,
+                      ),
                     ],
                   ),
                 ),
-                const TabBar(
-                  unselectedLabelColor: Color.fromARGB(113, 239, 239, 239),
-                  labelColor: AppColor.textColor,
-                  indicatorColor: AppColor.secondAccentColor,
-                  labelStyle:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  tabs: myTabs,
-                  dividerColor: AppColor.tertiaryColor,
-                ),
-              ],
+              ),
+              body: TabBarView(
+                children: ViewTournament.myTabs.map((Tab tab) {
+                  if (tab.text == 'Informações') {
+                    return buildInformacoesContent(snapshot.data!);
+                  } else if (tab.text == 'Partidas') {
+                    return buildPartidasContent(snapshot.data!);
+                  } else {
+                    return buildPosicoesContent(snapshot.data!);
+                  }
+                }).toList(),
+              ),
             ),
-          ),
-        ),
-        body: TabBarView(
-          children: myTabs.map((Tab tab) {
-            if (tab.text == 'Informações') {
-              return buildInformacoesContent();
-            } else if (tab.text == 'Partidas') {
-              return buildPartidasContent();
-            } else {
-              return buildPosicoesContent();
-            }
-          }).toList(),
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 
-  Widget buildInformacoesContent() {
+  Widget buildInformacoesContent(Tournament data) {
+    final championship = data;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(30),
@@ -125,9 +170,9 @@ class ViewTournament extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Lorem ipsum dolor sit amet est ut et consequat nonumy dolor et accusam justo dolor. Sea justo dignissim justo nonumy duo diam praesent diam rebum amet et dolor vel aliquyam ',
-              style: TextStyle(color: AppColor.textColor, fontSize: 16),
+            Text(
+              championship.description ?? 'Sem descrição',
+              style: const TextStyle(color: AppColor.textColor, fontSize: 16),
             ),
             const SizedBox(height: 30),
             const Text(
@@ -152,78 +197,78 @@ class ViewTournament extends StatelessWidget {
                   color: AppColor.tertiaryColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           'Equipes participando: ',
                           style: TextStyle(
                               color: AppColor.textColor, fontSize: 16),
                         ),
                         Text(
-                          '10',
-                          style: TextStyle(
+                          championship.teamsAmount.toString(),
+                          style: const TextStyle(
                               color: AppColor.textColor, fontSize: 16),
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'Palpitadores: ',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                        Text(
-                          '16',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Fechamento dos palpites: ',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                        Text(
-                          '13/07/2024',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Palpitador com mais pontos: ',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                        Text(
-                          'Kleberson',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Melhor jogador: ',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                        Text(
-                          'Giovanne',
-                          style: TextStyle(
-                              color: AppColor.textColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
+                    // const Row(
+                    //   children: [
+                    //     Text(
+                    //       'Palpitadores: ',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //     Text(
+                    //       '16',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //   ],
+                    // ),
+                    // const Row(
+                    //   children: [
+                    //     Text(
+                    //       'Fechamento dos palpites: ',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //     Text(
+                    //       '13/07/2024',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //   ],
+                    // ),
+                    // const Row(
+                    //   children: [
+                    //     Text(
+                    //       'Palpitador com mais pontos: ',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //     Text(
+                    //       'Kleberson',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //   ],
+                    // ),
+                    // const Row(
+                    //   children: [
+                    //     Text(
+                    //       'Melhor jogador: ',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //     Text(
+                    //       'Giovanne',
+                    //       style: TextStyle(
+                    //           color: AppColor.textColor, fontSize: 16),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -261,70 +306,105 @@ class ViewTournament extends StatelessWidget {
                 ])),
             Container(
               margin: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.all(10),
               width: 900,
-              height: 70,
+              height: 150,
               decoration: BoxDecoration(
                 color: AppColor.tertiaryColor,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Column(
-                children: [
-                  Wrap(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: const CircleAvatar(
-                            radius: 22.0,
-                            backgroundColor: AppColor.secondaryColor,
-                            child: Text('GC')),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: const CircleAvatar(
-                            radius: 22.0,
-                            backgroundColor: AppColor.secondaryColor,
-                            child: Text('EH')),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: const CircleAvatar(
-                            radius: 22.0,
-                            backgroundColor: AppColor.secondaryColor,
-                            child: Text('TL')),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: const CircleAvatar(
-                            radius: 22.0,
-                            backgroundColor: AppColor.secondaryColor,
-                            child: Text('FV')),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: const CircleAvatar(
-                            radius: 22.0,
-                            backgroundColor: AppColor.secondaryColor,
-                            child: Text('NC')),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              child: FutureBuilder(
+                  future: futureTeams,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Center(
+                        child: Text('Erro ao carregar equipes',
+                            style: TextStyle(color: AppColor.textColor)),
+                      );
+                    } else {
+                      return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          mainAxisSpacing: 10.0,
+                        ),
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.only(top: 12),
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                snapshot.data![index].picture ??
+                                    'https://placehold.co/600x400?text=No+Image',
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  }),
+              // Column(
+              //   children: [
+              //     Wrap(
+              //       children: [
+              //         Container(
+              //           margin: const EdgeInsets.only(top: 12),
+              //           child: const CircleAvatar(
+              //               radius: 22.0,
+              //               backgroundColor: AppColor.secondaryColor,
+              //               child: Text('GC')),
+              //         ),
+              //         const SizedBox(
+              //           width: 10,
+              //         ),
+              //         Container(
+              //           margin: const EdgeInsets.only(top: 12),
+              //           child: const CircleAvatar(
+              //               radius: 22.0,
+              //               backgroundColor: AppColor.secondaryColor,
+              //               child: Text('EH')),
+              //         ),
+              //         const SizedBox(
+              //           width: 10,
+              //         ),
+              //         Container(
+              //           margin: const EdgeInsets.only(top: 12),
+              //           child: const CircleAvatar(
+              //               radius: 22.0,
+              //               backgroundColor: AppColor.secondaryColor,
+              //               child: Text('TL')),
+              //         ),
+              //         const SizedBox(
+              //           width: 10,
+              //         ),
+              //         Container(
+              //           margin: const EdgeInsets.only(top: 12),
+              //           child: const CircleAvatar(
+              //               radius: 22.0,
+              //               backgroundColor: AppColor.secondaryColor,
+              //               child: Text('FV')),
+              //         ),
+              //         const SizedBox(
+              //           width: 10,
+              //         ),
+              //         Container(
+              //           margin: const EdgeInsets.only(top: 12),
+              //           child: const CircleAvatar(
+              //               radius: 22.0,
+              //               backgroundColor: AppColor.secondaryColor,
+              //               child: Text('NC')),
+              //         ),
+              //         const SizedBox(
+              //           width: 10,
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
             ),
             const SizedBox(height: 30),
             Container(
@@ -363,7 +443,7 @@ class ViewTournament extends StatelessWidget {
   }
 
 // Gerando partidas atuais e antigas
-  Widget buildPartidasContent() {
+  Widget buildPartidasContent(Tournament data) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(30),
@@ -602,7 +682,7 @@ class ViewTournament extends StatelessWidget {
     );
   }
 
-  Widget buildPosicoesContent() {
+  Widget buildPosicoesContent(Tournament data) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(30),
