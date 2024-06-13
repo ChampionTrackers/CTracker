@@ -90,14 +90,19 @@ class _ViewGuessState extends State<ViewGuess> {
     try {
       await _guessController.makeGuess(
           widget.matchId, _selectedTeamId!, _sliderValue);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Palpite realizado com sucesso')),
-      );
-      Navigator.pop(context);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Palpite realizado com sucesso')),
+        );
+        Navigator.pop(context);
+      }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('$error')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('$error')),
+        );
+      }
     }
   }
 

@@ -20,10 +20,7 @@ class GuessController {
       }),
     );
 
-    if (response.statusCode == 201) {
-      // Sucesso
-      print('Palpite realizado com sucesso');
-    } else {
+    if (response.statusCode != 201) {
       // Falha
       final errorResponse = jsonDecode(response.body);
       throw Exception(errorResponse['message']);
