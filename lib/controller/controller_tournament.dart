@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ctracker/model/team_model.dart';
 import 'package:ctracker/model/tournament_model.dart';
+import 'package:ctracker/model/match_model.dart';
 import 'package:http/http.dart' as http;
 
 class TournamentController {
@@ -44,6 +45,22 @@ class TournamentController {
       return teams;
     } else {
       throw Exception("Failed to load teams");
+    }
+  }
+
+  Future<List<Match>> fetchMatches(int tournamentId) async {
+    final response = await http.get(
+      Uri.parse(
+          'https://ctracker-server.onrender.com/v1/championships/$tournamentId/matches'),
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> matchesJson = json.decode(response.body);
+      List<Match> matches =
+          matchesJson.map((json) => Match.fromJson(json)).toList();
+      return matches;
+    } else {
+      throw Exception('Failed to load matches');
     }
   }
 }
