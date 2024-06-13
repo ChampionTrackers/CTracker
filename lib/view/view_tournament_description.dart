@@ -1,8 +1,11 @@
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/controller/controller_tournament.dart';
+import 'package:ctracker/model/match_model.dart';
 import 'package:ctracker/model/team_model.dart';
 import 'package:ctracker/model/tournament_model.dart';
+import 'package:ctracker/widget/tracker_match_card.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class ViewTournament extends StatefulWidget {
   final int tournamentId;
@@ -22,11 +25,15 @@ class ViewTournament extends StatefulWidget {
 class _ViewTournamentState extends State<ViewTournament> {
   late Future<Tournament> futureTournament;
   late Future<List<Team>> futureTeams;
+  late Future<List<Match>> futureMatches;
   TournamentController controller = TournamentController();
+
   @override
   void initState() {
     futureTournament = controller.fetchTournamentDetails(widget.tournamentId);
     futureTeams = controller.fetchTeams(widget.tournamentId);
+    futureMatches = controller.fetchMatches(widget.tournamentId);
+    initializeDateFormatting('pt_BR', null);
     super.initState();
   }
 
@@ -140,7 +147,7 @@ class _ViewTournamentState extends State<ViewTournament> {
                   if (tab.text == 'Informações') {
                     return buildInformacoesContent(snapshot.data!);
                   } else if (tab.text == 'Partidas') {
-                    return buildPartidasContent(snapshot.data!);
+                    return buildPartidasContent();
                   } else {
                     return buildPosicoesContent(snapshot.data!);
                   }
@@ -183,7 +190,6 @@ class _ViewTournamentState extends State<ViewTournament> {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
-            // Informações
             Container(
               margin: const EdgeInsets.all(0.1),
               decoration: BoxDecoration(
@@ -213,62 +219,6 @@ class _ViewTournamentState extends State<ViewTournament> {
                         ),
                       ],
                     ),
-                    // const Row(
-                    //   children: [
-                    //     Text(
-                    //       'Palpitadores: ',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //     Text(
-                    //       '16',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //   ],
-                    // ),
-                    // const Row(
-                    //   children: [
-                    //     Text(
-                    //       'Fechamento dos palpites: ',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //     Text(
-                    //       '13/07/2024',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //   ],
-                    // ),
-                    // const Row(
-                    //   children: [
-                    //     Text(
-                    //       'Palpitador com mais pontos: ',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //     Text(
-                    //       'Kleberson',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //   ],
-                    // ),
-                    // const Row(
-                    //   children: [
-                    //     Text(
-                    //       'Melhor jogador: ',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //     Text(
-                    //       'Giovanne',
-                    //       style: TextStyle(
-                    //           color: AppColor.textColor, fontSize: 16),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
@@ -285,7 +235,6 @@ class _ViewTournamentState extends State<ViewTournament> {
                             Container(
                                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: const Row(
-                                    //Linha
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
@@ -347,64 +296,6 @@ class _ViewTournamentState extends State<ViewTournament> {
                       );
                     }
                   }),
-              // Column(
-              //   children: [
-              //     Wrap(
-              //       children: [
-              //         Container(
-              //           margin: const EdgeInsets.only(top: 12),
-              //           child: const CircleAvatar(
-              //               radius: 22.0,
-              //               backgroundColor: AppColor.secondaryColor,
-              //               child: Text('GC')),
-              //         ),
-              //         const SizedBox(
-              //           width: 10,
-              //         ),
-              //         Container(
-              //           margin: const EdgeInsets.only(top: 12),
-              //           child: const CircleAvatar(
-              //               radius: 22.0,
-              //               backgroundColor: AppColor.secondaryColor,
-              //               child: Text('EH')),
-              //         ),
-              //         const SizedBox(
-              //           width: 10,
-              //         ),
-              //         Container(
-              //           margin: const EdgeInsets.only(top: 12),
-              //           child: const CircleAvatar(
-              //               radius: 22.0,
-              //               backgroundColor: AppColor.secondaryColor,
-              //               child: Text('TL')),
-              //         ),
-              //         const SizedBox(
-              //           width: 10,
-              //         ),
-              //         Container(
-              //           margin: const EdgeInsets.only(top: 12),
-              //           child: const CircleAvatar(
-              //               radius: 22.0,
-              //               backgroundColor: AppColor.secondaryColor,
-              //               child: Text('FV')),
-              //         ),
-              //         const SizedBox(
-              //           width: 10,
-              //         ),
-              //         Container(
-              //           margin: const EdgeInsets.only(top: 12),
-              //           child: const CircleAvatar(
-              //               radius: 22.0,
-              //               backgroundColor: AppColor.secondaryColor,
-              //               child: Text('NC')),
-              //         ),
-              //         const SizedBox(
-              //           width: 10,
-              //         ),
-              //       ],
-              //     ),
-              //   ],
-              // ),
             ),
             const SizedBox(height: 30),
             Container(
@@ -442,243 +333,54 @@ class _ViewTournamentState extends State<ViewTournament> {
     );
   }
 
-// Gerando partidas atuais e antigas
-  Widget buildPartidasContent(Tournament data) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Partidas atuais',
-              style: TextStyle(
-                color: AppColor.textColor,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            ...List.generate(1, (index) => buildPartidasAtuaisBox()),
-            const SizedBox(height: 20),
-            const Text(
-              'Partidas antigas',
-              style: TextStyle(
-                color: AppColor.textColor,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            ...List.generate(
-                2,
-                (index) =>
-                    buildPartidasAntigasBox()), // Gerando partidas antigas
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildPartidasAtuaisBox() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 15),
-      padding: const EdgeInsets.all(10),
-      width: 340,
-      decoration: BoxDecoration(
-        color: AppColor.tertiaryColor,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: const Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColor.primaryColor,
+  Widget buildPartidasContent() {
+    return FutureBuilder(
+      future: futureMatches,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Erro ao carregar partidas',
+                style: TextStyle(color: AppColor.textColor)),
+          );
+        } else {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Partidas atuais',
+                    style: TextStyle(
+                      color: AppColor.textColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Team A',
-                      style: TextStyle(
-                        color: AppColor.textColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColor.primaryColor,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Team B',
-                      style: TextStyle(
-                        color: AppColor.textColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: 20,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '5',
-                  style: TextStyle(
-                    color: AppColor.textColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  ': 0',
-                  style: TextStyle(
-                    color: AppColor.textColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 15,
-            left: 0,
-            right: 0,
-            child: Text(
-              '13/07/2024',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColor.textColor,
-                fontSize: 16,
+                  const SizedBox(height: 10),
+                  ...snapshot.data!.map((match) => TrackerMatchCard(
+                        context: context,
+                        teamAName: match.homeTeam.name,
+                        teamBName: match.awayTeam.name,
+                        teamAScore: match.homeTeam.score.toString(),
+                        teamBScore: match.awayTeam.score.toString(),
+                        teamAImageUrl: match.homeTeam.picture,
+                        teamBImageUrl: match.awayTeam.picture,
+                        startDate: match.plannedStartTime,
+                        matchId: match.id,
+                        teamAId: match.homeTeam.id,
+                        teamBId: match.awayTeam.id,
+                      )),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildPartidasAntigasBox() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(10),
-      width: 340,
-      decoration: BoxDecoration(
-        color: AppColor.tertiaryColor,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: const Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColor.primaryColor,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Team C',
-                      style: TextStyle(
-                        color: AppColor.textColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColor.primaryColor,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Team D',
-                      style: TextStyle(
-                        color: AppColor.textColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: 20,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '2',
-                  style: TextStyle(
-                    color: AppColor.textColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  ': 8',
-                  style: TextStyle(
-                    color: AppColor.textColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 15,
-            left: 0,
-            right: 0,
-            child: Text(
-              '10/07/2024',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColor.textColor,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 
