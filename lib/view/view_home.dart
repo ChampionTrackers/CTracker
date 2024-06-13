@@ -49,7 +49,7 @@ class _ViewHomeState extends State<ViewHome> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Seus Torneios',
+                    'Torneios Públicos',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
