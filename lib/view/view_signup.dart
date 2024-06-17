@@ -13,6 +13,7 @@ class ViewSignup extends StatefulWidget {
 }
 
 class _ViewSignupState extends State<ViewSignup> {
+  final nameInputController = TextEditingController();
   final usernameInputController = TextEditingController();
   final emailInputController = TextEditingController();
   final passwordInputController = TextEditingController();
@@ -30,6 +31,7 @@ class _ViewSignupState extends State<ViewSignup> {
     try {
       await signupController.submitSignup(
         context,
+        nameInputController,
         usernameInputController,
         emailInputController,
         passwordInputController,
@@ -114,9 +116,16 @@ class _ViewSignupState extends State<ViewSignup> {
             const SizedBox(height: 20),
             FormTextField(
               keyboardType: TextInputType.text,
+              labelText: "Name",
+              controller: nameInputController,
+              hintText: "Champions Silva",
+            ),
+            const SizedBox(height: 20),
+            FormTextField(
+              keyboardType: TextInputType.text,
               labelText: "Username",
               controller: usernameInputController,
-              hintText: "ChampionMaster",
+              hintText: "ChampionMaster12",
             ),
             const SizedBox(height: 20),
             FormTextField(
