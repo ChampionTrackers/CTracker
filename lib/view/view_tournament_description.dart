@@ -82,6 +82,8 @@ class _ViewTournamentState extends State<ViewTournament> {
                               padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                               child: Text(
                                 snapshot.data?.name ?? 'Sem nome',
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
                                 style: const TextStyle(
                                   color: AppColor.textColor,
                                   fontSize: 30,
