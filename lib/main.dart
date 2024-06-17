@@ -2,13 +2,14 @@ import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/utils/verify_jwt.dart';
 import 'package:ctracker/view/view_home.dart';
 import 'package:ctracker/view/view_login.dart';
+import 'package:ctracker/view/view_splash.dart';
 import 'package:ctracker/view/view_welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: const Root(),
+    home: const SplashScreen(),
     theme: ThemeData(
       scaffoldBackgroundColor: AppColor.backgroundColor,
       hintColor: AppColor.primaryColor,

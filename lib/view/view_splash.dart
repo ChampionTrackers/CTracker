@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:ctracker/constants/colors.dart';
-import 'package:ctracker/view/view_login.dart';
+import 'package:ctracker/main.dart'; // Importar a Root
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -13,16 +13,19 @@ class SplashScreen extends StatelessWidget {
       splash: Column(
         children: [
           SizedBox(
-            width: 100, // largura da imagem de animação
-            height: 100, // altura da imagem de animação
+            width: 100,
+            height: 100,
             child:
                 LottieBuilder.asset("assets/images/lottie/trofeupiscando.json"),
           )
         ],
       ),
-      nextScreen: const ViewLogin(),
+      nextScreen: const Root(),
       splashIconSize: 100,
       backgroundColor: AppColor.backgroundColor,
+      duration: 3000,
+      splashTransition: SplashTransition.fadeTransition,
+      animationDuration: const Duration(seconds: 1),
     );
   }
 }
