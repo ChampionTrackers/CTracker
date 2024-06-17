@@ -199,6 +199,7 @@ class _ViewSignupState extends State<ViewSignup> {
                 ),
               ),
             ),
+            const SizedBox(height: 50)
           ],
         ),
       ),
