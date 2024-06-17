@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ctracker/constants/config.dart';
 import 'package:ctracker/view/view_home.dart';
 import 'package:ctracker/view/view_signup.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class LoginController {
 
   Future<String> _attemptLogIn(String email, String password) async {
     var res = await http.post(
-        Uri.parse("https://ctracker-server.onrender.com/v1/sessions/password"),
+        Uri.parse("${Config.apiBaseUrl}/v1/sessions/password"),
         headers: {"Content-Type": "application/json"},
         body: json.encode({
           "email": email,

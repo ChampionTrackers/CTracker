@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ctracker/constants/config.dart';
 import 'package:ctracker/model/user_model.dart';
 import 'package:ctracker/utils/snack_bar.dart';
 import 'package:ctracker/utils/verify_jwt.dart';
@@ -16,7 +17,7 @@ class EditProfileController {
 
     // Fetch profile data from API
     var res = await http.get(
-        Uri.parse("https://ctracker-server.onrender.com/v1/profile"),
+        Uri.parse("${Config.apiBaseUrl}/v1/profile"),
         headers: {
           "Content-Type": "application/json",
           'Accept': 'application/json',
@@ -36,7 +37,7 @@ class EditProfileController {
     var jwt = await verifyJwt();
 
     final res = await http.patch(
-        Uri.parse("https://ctracker-server.onrender.com/v1/users"),
+        Uri.parse("${Config.apiBaseUrl}/v1/users"),
         headers: {
           "Content-Type": "application/json",
           'Accept': 'application/json',
@@ -52,7 +53,7 @@ class EditProfileController {
     var jwt = await verifyJwt();
 
     final res = await http.put(
-        Uri.parse("https://ctracker-server.onrender.com/v1/password/change"),
+        Uri.parse("${Config.apiBaseUrl}/v1/password/change"),
         headers: {
           "Content-Type": "application/json",
           'Accept': 'application/json',

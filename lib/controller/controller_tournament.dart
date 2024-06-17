@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+import 'package:ctracker/constants/config.dart';
+import 'package:ctracker/model/match_model.dart';
 import 'package:ctracker/model/team_model.dart';
 import 'package:ctracker/model/tournament_model.dart';
-import 'package:ctracker/model/match_model.dart';
 import 'package:http/http.dart' as http;
 
 class TournamentController {
   Future<Tournament> fetchTournamentDetails(int id) async {
     final uriChampionship =
-        Uri.https("ctracker-server.onrender.com", "/v1/championships/$id");
+        Uri.parse("${Config.apiBaseUrl}/v1/championships/$id");
 
     final response = await http.get(
       uriChampionship,
@@ -50,8 +51,7 @@ class TournamentController {
 
   Future<List<Match>> fetchMatches(int tournamentId) async {
     final response = await http.get(
-      Uri.parse(
-          'https://ctracker-server.onrender.com/v1/championships/$tournamentId/matches'),
+      Uri.parse('${Config.apiBaseUrl}/v1/championships/$tournamentId/matches'),
     );
 
     if (response.statusCode == 200) {

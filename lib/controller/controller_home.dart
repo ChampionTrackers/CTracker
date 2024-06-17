@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ctracker/constants/config.dart';
 import 'package:ctracker/model/tournament_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,8 +11,7 @@ class HomeController {
       "pageSize": "5",
     };
 
-    final uri = Uri.https(
-        "ctracker-server.onrender.com", "/v1/championships", queryParams);
+    final uri = Uri.https(Config.apiHost, "/v1/championships", queryParams);
 
     final res = await http.get(
       uri,
