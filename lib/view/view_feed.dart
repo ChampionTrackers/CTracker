@@ -105,67 +105,67 @@ class _ViewFeedState extends State<ViewFeed> {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Suas Equipes",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.textColor,
-                      )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        minimumSize: Size.zero,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        backgroundColor: AppColor.secondAccentColor,
-                      ),
-                      child: const Text(
-                        "VER MAIS",
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ))
-                ],
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 90,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    _buildTeamCard(
-                        teamName: "Equipe Foguete",
-                        wins: 3,
-                        playerCount: 5,
-                        imagePath:
-                            "https://picsum.photos/seed/foguete/200/200"),
-                    _buildTeamCard(
-                        teamName: "Equipe Invejosos",
-                        wins: 2,
-                        playerCount: 3,
-                        imagePath:
-                            "https://picsum.photos/seed/invejosos/200/200"),
-                    _buildTeamCard(
-                        teamName: "Alvejante Plays",
-                        wins: 3,
-                        playerCount: 5,
-                        imagePath:
-                            "https://picsum.photos/seed/alvejante/200/200"),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text("Seus Torneios",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.textColor,
-                  )),
-              const SizedBox(height: 20),
-              _buildTournamentTable(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Text("Suas Equipes",
+              //         style: TextStyle(
+              //           fontSize: 30,
+              //           fontWeight: FontWeight.bold,
+              //           color: AppColor.textColor,
+              //         )),
+              //     ElevatedButton(
+              //         onPressed: () {},
+              //         style: ElevatedButton.styleFrom(
+              //           padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+              //           minimumSize: Size.zero,
+              //           shape: RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(5)),
+              //           backgroundColor: AppColor.secondAccentColor,
+              //         ),
+              //         child: const Text(
+              //           "VER MAIS",
+              //           style: TextStyle(
+              //               color: Colors.black, fontWeight: FontWeight.bold),
+              //         ))
+              //   ],
+              // ),
+              // const SizedBox(height: 20),
+              // SizedBox(
+              //   height: 90,
+              //   child: ListView(
+              //     scrollDirection: Axis.horizontal,
+              //     children: <Widget>[
+              //       _buildTeamCard(
+              //           teamName: "Equipe Foguete",
+              //           wins: 3,
+              //           playerCount: 5,
+              //           imagePath:
+              //               "https://picsum.photos/seed/foguete/200/200"),
+              //       _buildTeamCard(
+              //           teamName: "Equipe Invejosos",
+              //           wins: 2,
+              //           playerCount: 3,
+              //           imagePath:
+              //               "https://picsum.photos/seed/invejosos/200/200"),
+              //       _buildTeamCard(
+              //           teamName: "Alvejante Plays",
+              //           wins: 3,
+              //           playerCount: 5,
+              //           imagePath:
+              //               "https://picsum.photos/seed/alvejante/200/200"),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(height: 20),
+              // const Text("Seus Torneios",
+              //     style: TextStyle(
+              //       fontSize: 30,
+              //       fontWeight: FontWeight.bold,
+              //       color: AppColor.textColor,
+              //     )),
+              // const SizedBox(height: 20),
+              // _buildTournamentTable(),
             ],
           ),
         ),
