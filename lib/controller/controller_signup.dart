@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 class SignupController {
   Future<int> _attemptSignUp(
       String email, String name, String username, String password) async {
-    var res = await http.post(
-        Uri.parse("${Config.apiBaseUrl}/v1/users"),
+    var res = await http.post(Uri.parse("${Config.apiBaseUrl}/v1/users"),
         headers: {"Content-Type": "application/json"},
         body: json.encode({
           "email": email,

@@ -16,13 +16,12 @@ class EditProfileController {
     var jwt = await verifyJwt();
 
     // Fetch profile data from API
-    var res = await http.get(
-        Uri.parse("${Config.apiBaseUrl}/v1/profile"),
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          "Authorization": "Bearer $jwt"
-        });
+    var res =
+        await http.get(Uri.parse("${Config.apiBaseUrl}/v1/profile"), headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer $jwt"
+    });
 
     if (res.statusCode == 200) {
       if (kDebugMode) print("Response: ${res.body}");
@@ -36,8 +35,7 @@ class EditProfileController {
       User userModel, String password) async {
     var jwt = await verifyJwt();
 
-    final res = await http.patch(
-        Uri.parse("${Config.apiBaseUrl}/v1/users"),
+    final res = await http.patch(Uri.parse("${Config.apiBaseUrl}/v1/users"),
         headers: {
           "Content-Type": "application/json",
           'Accept': 'application/json',
@@ -52,17 +50,17 @@ class EditProfileController {
       String oldPassword, String newPassword) async {
     var jwt = await verifyJwt();
 
-    final res = await http.put(
-        Uri.parse("${Config.apiBaseUrl}/v1/password/change"),
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $jwt',
-        },
-        body: json.encode({
-          "password": oldPassword,
-          "newPassword": newPassword,
-        }));
+    final res =
+        await http.put(Uri.parse("${Config.apiBaseUrl}/v1/password/change"),
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              'Authorization': 'Bearer $jwt',
+            },
+            body: json.encode({
+              "password": oldPassword,
+              "newPassword": newPassword,
+            }));
 
     return res;
   }

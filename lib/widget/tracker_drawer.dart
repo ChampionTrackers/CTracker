@@ -24,13 +24,12 @@ class _TrackerDrawerState extends State<TrackerDrawer> {
     var jwt = await verifyJwt();
 
     // Fetch profile data from API
-    var res = await http.get(
-        Uri.parse("${Config.apiBaseUrl}/v1/profile"),
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          "Authorization": "Bearer $jwt"
-        });
+    var res =
+        await http.get(Uri.parse("${Config.apiBaseUrl}/v1/profile"), headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer $jwt"
+    });
 
     if (res.statusCode == 200) {
       if (kDebugMode) print("Response: ${res.body}");

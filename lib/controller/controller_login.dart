@@ -13,13 +13,13 @@ class LoginController {
   final storage = const FlutterSecureStorage();
 
   Future<String> _attemptLogIn(String email, String password) async {
-    var res = await http.post(
-        Uri.parse("${Config.apiBaseUrl}/v1/sessions/password"),
-        headers: {"Content-Type": "application/json"},
-        body: json.encode({
-          "email": email,
-          "password": password,
-        }));
+    var res =
+        await http.post(Uri.parse("${Config.apiBaseUrl}/v1/sessions/password"),
+            headers: {"Content-Type": "application/json"},
+            body: json.encode({
+              "email": email,
+              "password": password,
+            }));
 
     if (kDebugMode) print(res.statusCode);
 
