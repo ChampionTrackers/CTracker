@@ -10,16 +10,6 @@ class ViewShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TrackerAppBar(),
-      endDrawer: const TrackerDrawer(),
-      bottomNavigationBar: const BottomNavigation(),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-          backgroundColor: AppColor.secondAccentColor,
-          child: const Icon(Icons.search)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: const Text("Shop"),
     );
   }
