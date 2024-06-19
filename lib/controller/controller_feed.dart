@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ctracker/constants/config.dart';
 import 'package:ctracker/model/guess_model.dart';
 import 'package:ctracker/utils/verify_jwt.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +10,7 @@ class FeedController {
     var jwt = await verifyJwt();
 
     final response = await http.get(
-      Uri.parse('https://ctracker-server.onrender.com/v1/guesses'),
+      Uri.parse('${Config.apiBaseUrl}/v1/guesses'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $jwt',

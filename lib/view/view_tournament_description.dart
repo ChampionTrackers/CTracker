@@ -2,6 +2,7 @@ import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/controller/controller_tournament.dart';
 import 'package:ctracker/model/match_model.dart';
 import 'package:ctracker/model/team_model.dart';
+import 'package:ctracker/model/team_position_model.dart';
 import 'package:ctracker/model/tournament_model.dart';
 import 'package:ctracker/widget/tracker_match_card.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _ViewTournamentState extends State<ViewTournament> {
   late Future<Tournament> futureTournament;
   late Future<List<Team>> futureTeams;
   late Future<List<Match>> futureMatches;
+  late Future<List<TeamPosition>> futurePositions;
   TournamentController controller = TournamentController();
 
   @override
@@ -33,6 +35,8 @@ class _ViewTournamentState extends State<ViewTournament> {
     futureTournament = controller.fetchTournamentDetails(widget.tournamentId);
     futureTeams = controller.fetchTeams(widget.tournamentId);
     futureMatches = controller.fetchMatches(widget.tournamentId);
+    futurePositions = controller.fetchPositions(widget.tournamentId);
+
     initializeDateFormatting('pt_BR', null);
     super.initState();
   }
@@ -82,6 +86,8 @@ class _ViewTournamentState extends State<ViewTournament> {
                               padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                               child: Text(
                                 snapshot.data?.name ?? 'Sem nome',
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
                                 style: const TextStyle(
                                   color: AppColor.textColor,
                                   fontSize: 30,
@@ -170,7 +176,7 @@ class _ViewTournamentState extends State<ViewTournament> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'Regras do Campeonato',
+              'Descrição',
               style: TextStyle(
                   color: AppColor.textColor,
                   fontSize: 20,
@@ -385,102 +391,113 @@ class _ViewTournamentState extends State<ViewTournament> {
   }
 
   Widget buildPosicoesContent(Tournament data) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Table(
-              columnWidths: const {
-                0: FlexColumnWidth(1),
-                1: FlexColumnWidth(2),
-                2: FlexColumnWidth(1),
-              },
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: [
-                TableRow(
-                  children: [
-                    TableCell(
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Posição',
-                          style: TextStyle(
-                            color: AppColor.textColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+    return FutureBuilder(
+      future: futurePositions,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Erro ao carregar posições',
+                style: TextStyle(color: AppColor.textColor)),
+          );
+        } else {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Table(
+                    columnWidths: const {
+                      0: FlexColumnWidth(1),
+                      1: FlexColumnWidth(2),
+                      2: FlexColumnWidth(1),
+                    },
+                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                    children: [
+                      TableRow(
+                        children: [
+                          TableCell(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'Posição',
+                                style: TextStyle(
+                                  color: AppColor.textColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    TableCell(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Equipe',
-                          style: TextStyle(
-                            color: AppColor.textColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                          TableCell(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'Equipe',
+                                style: TextStyle(
+                                  color: AppColor.textColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    TableCell(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'VDE',
-                          style: TextStyle(
-                            color: AppColor.textColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                          TableCell(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'Pontos',
+                                style: TextStyle(
+                                  color: AppColor.textColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                const TableRow(
-                  children: [
-                    SizedBox(height: 15), // Espaçamento entre as linhas
-                    SizedBox(height: 15),
-                    SizedBox(height: 15),
-                  ],
-                ),
-                buildTableRow('1°', 'The Mystics', '3.5'),
-                const TableRow(
-                  children: [
-                    SizedBox(height: 15), // Espaçamento entre as linhas
-                    SizedBox(height: 15),
-                    SizedBox(height: 15),
-                  ],
-                ),
-                buildTableRow('2°', 'The Dogs', '3.5'),
-                const TableRow(
-                  children: [
-                    SizedBox(height: 15), // Espaçamento entre as linhas
-                    SizedBox(height: 15),
-                    SizedBox(height: 15),
-                  ],
-                ),
-                buildTableRow('3°', 'The Sailors', '3.5'),
-                const TableRow(
-                  children: [
-                    SizedBox(height: 15),
-                    SizedBox(height: 15),
-                    SizedBox(height: 15),
-                  ],
-                ),
-                buildTableRow('4°', 'Loren Ipsum', '3.5'),
-              ],
+                      const TableRow(
+                        children: [
+                          SizedBox(height: 15), // Espaçamento entre as linhas
+                          SizedBox(height: 15),
+                          SizedBox(height: 15),
+                        ],
+                      ),
+                      ...snapshot.data!
+                          .asMap()
+                          .entries
+                          .map((entry) => [
+                                buildTableRow(
+                                  (entry.key + 1).toString(),
+                                  entry.value.teamName,
+                                  entry.value.points.toString(),
+                                ),
+                                const TableRow(
+                                  children: [
+                                    SizedBox(
+                                        height:
+                                            15), // Espaçamento entre as linhas
+                                    SizedBox(height: 15),
+                                    SizedBox(height: 15),
+                                  ],
+                                ),
+                              ])
+                          .expand((element) => element),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 

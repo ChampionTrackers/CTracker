@@ -1,5 +1,6 @@
 import "dart:convert";
 
+import "package:ctracker/constants/config.dart";
 import "package:ctracker/model/user_model.dart";
 import "package:ctracker/utils/verify_jwt.dart";
 import "package:flutter/foundation.dart";
@@ -13,13 +14,12 @@ class ProfileController {
     var jwt = await verifyJwt();
 
     // Fetch profile data from API
-    var res = await http.get(
-        Uri.parse("https://ctracker-server.onrender.com/v1/profile"),
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          "Authorization": "Bearer $jwt"
-        });
+    var res =
+        await http.get(Uri.parse("${Config.apiBaseUrl}/v1/profile"), headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": "Bearer $jwt"
+    });
 
     if (res.statusCode == 200) {
       if (kDebugMode) print("Response: ${res.body}");

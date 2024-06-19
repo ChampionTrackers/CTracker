@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ctracker/constants/config.dart';
 import 'package:ctracker/utils/snack_bar.dart';
 import 'package:ctracker/view/view_login.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,13 @@ import 'package:http/http.dart' as http;
 
 class SignupController {
   Future<int> _attemptSignUp(
-      String email, String username, String password) async {
-    var res = await http.post(
-        Uri.parse("https://ctracker-server.onrender.com/v1/users"),
+      String email, String name, String username, String password) async {
+    var res = await http.post(Uri.parse("${Config.apiBaseUrl}/v1/users"),
         headers: {"Content-Type": "application/json"},
         body: json.encode({
           "email": email,
           "password": password,
-          "name": "Noob",
+          "name": name,
           "nickname": username,
           "picture": "https://api.dicebear.com/8.x/lorelei/png?seed=$username"
         }));
@@ -23,11 +23,13 @@ class SignupController {
 
   submitSignup(
       BuildContext context,
+      TextEditingController nameInputController,
       TextEditingController usernameInputController,
       TextEditingController emailInputController,
       TextEditingController passwordInputController,
       TextEditingController confirmPasswordInputController,
       termsCheckbox) async {
+    var name = nameInputController.text;
     var email = emailInputController.text;
     var username = usernameInputController.text;
     var password = passwordInputController.text;
@@ -43,7 +45,7 @@ class SignupController {
       return;
     }
 
-    var res = await _attemptSignUp(email, username, password);
+    var res = await _attemptSignUp(email, name, username, password);
     if (res == 201) {
       if (!context.mounted) return;
       snackBar(context, "Conta criada com sucesso");
