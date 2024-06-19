@@ -62,7 +62,8 @@ class _ViewHomeState extends State<ViewHome> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ViewMoreTournaments()));
+                                builder: (context) =>
+                                    const ViewMoreTournaments()));
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
