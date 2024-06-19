@@ -27,8 +27,8 @@ class TournamentController {
   }
 
   Future<List<Team>> fetchTeams(int id) async {
-    final uriTeams = Uri.https(
-        "ctracker-server.onrender.com", "/v1/championships/$id/teams");
+    final uriTeams =
+        Uri.parse("${Config.apiBaseUrl}/v1/championships/$id/teams");
 
     final response = await http.get(
       uriTeams,
