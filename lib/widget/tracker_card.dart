@@ -60,9 +60,10 @@ class TrackerCard extends StatelessWidget {
                           title,
                           style: const TextStyle(
                               color: AppColor.textColor,
-                              fontSize: 18,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 10),
                         Row(

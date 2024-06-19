@@ -1,11 +1,27 @@
 import 'package:ctracker/constants/colors.dart';
+import 'package:ctracker/controller/controller_feed.dart';
+import 'package:ctracker/model/guess_model.dart';
 import 'package:ctracker/widget/bottom_navigation.dart';
 import 'package:ctracker/widget/tracker_appbar.dart';
 import 'package:ctracker/widget/tracker_drawer.dart';
 import 'package:flutter/material.dart';
 
-class ViewFeed extends StatelessWidget {
+class ViewFeed extends StatefulWidget {
   const ViewFeed({super.key});
+
+  @override
+  State<ViewFeed> createState() => _ViewFeedState();
+}
+
+class _ViewFeedState extends State<ViewFeed> {
+  late Future<List<Guess>> futureGuesses;
+  final FeedController _controller = FeedController();
+
+  @override
+  void initState() {
+    super.initState();
+    futureGuesses = _controller.fetchGuesses();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +30,11 @@ class ViewFeed extends StatelessWidget {
       endDrawer: const TrackerDrawer(),
       bottomNavigationBar: const BottomNavigation(),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-          backgroundColor: AppColor.secondAccentColor,
-          child: const Icon(Icons.search)),
+        onPressed: () {},
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        backgroundColor: AppColor.secondAccentColor,
+        child: const Icon(Icons.search),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
         child: Padding(
@@ -43,29 +59,47 @@ class ViewFeed extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: SizedBox(
                     height: 160,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: <Widget>[
-                        _buildGuessRow(
-                            teamName: "Blue Tigers",
-                            championshipName: "Sword Fighters",
-                            coins: 20),
-                        const Divider(color: AppColor.accentColor),
-                        _buildGuessRow(
-                            teamName: "Death Lock",
-                            championshipName: "Jogo da Velha",
-                            coins: 15),
-                        const Divider(color: AppColor.accentColor),
-                        _buildGuessRow(
-                            teamName: "Equipe Foguete",
-                            championshipName: "Bolinha de Gude Ultimate",
-                            coins: 7),
-                        const Divider(color: AppColor.accentColor),
-                        _buildGuessRow(
-                            teamName: "Destroyers2000",
-                            championshipName: "Worms W.M.D. Championship",
-                            coins: 15),
-                      ],
+                    child: FutureBuilder<List<Guess>>(
+                      future: futureGuesses,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text(
+                              'Erro ao carregar palpites: ${snapshot.error}',
+                              style: const TextStyle(color: AppColor.textColor),
+                            ),
+                          );
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Center(
+                            child: Text('Nenhum palpite encontrado',
+                                style: TextStyle(color: AppColor.textColor)),
+                          );
+                        } else {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              Guess guess = snapshot.data![index];
+                              return Column(
+                                children: [
+                                  _buildGuessRow(
+                                      teamName: guess.teamName,
+                                      championshipName: guess.championshipName,
+                                      coins: guess.guessCost),
+                                  if (index < snapshot.data!.length - 1)
+                                    const Divider(color: AppColor.accentColor),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),
