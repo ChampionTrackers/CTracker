@@ -1,6 +1,6 @@
 class Config {
   static const String apiScheme = 'https';
-  static const String apiHost = 'ctracker-server.onrender.com';
+  static const String apiHost = 'api.championstracker.com';
   static const String apiBaseUrl = '$apiScheme://$apiHost';
 
   // static const String apiBaseUrl = bool.fromEnvironment('dart.vm.product')
