@@ -22,94 +22,26 @@ class ViewTeamInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                      color: AppColor.tertiaryColor,
-                      border: Border(
-                        bottom: BorderSide(
-                          color: AppColor.accentColor,
-                          width: 1,
-                        ),
-                      ),
-                    ),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [
-                        // Envolver PopupMenuButton em um Container para controlar a largura
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width *
-                              0.7, // Largura responsiva
-                          child: PopupMenuButton<String>(
-                            color: AppColor.tertiaryColor,
-                            itemBuilder: (BuildContext context) =>
-                                <PopupMenuEntry<String>>[
-                              PopupMenuItem<String>(
-                                value: 'Option 1',
-                                child: Container(
-                                  // decoration: const BoxDecoration(
-                                  //   border: Border(
-                                  //     bottom: BorderSide(
-                                  //       color: AppColor.accentColor,
-                                  //       width: 1,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  child: const Text(
-                                    'The Bitter Rangers',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                        Expanded(
+                          child: Container(
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 1),
+                            decoration: const BoxDecoration(
+                              color: AppColor.tertiaryColor,
+                            ),
+                            child: Column(
+                              children: [
+                                const Expanded(
+                                  child: TeamDropdown(),
                                 ),
-                              ),
-                              PopupMenuItem<String>(
-                                value: 'Option 2',
-                                child: Container(
-                                  // decoration: const BoxDecoration(
-                                  //   border: Border(
-                                  //     bottom: BorderSide(
-                                  //       color: AppColor.accentColor,
-                                  //       width: 1,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  child: const Text(
-                                    "CPI's Hurricane",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                Container(
+                                  height: 1,
+                                  color: AppColor.accentColor,
                                 ),
-                              ),
-                              PopupMenuItem<String>(
-                                value: 'Option 3',
-                                child: Container(
-                                  // decoration: const BoxDecoration(
-                                  //   border: Border(
-                                  //     bottom: BorderSide(
-                                  //       color: AppColor.accentColor,
-                                  //       width: 1,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  child: const Text(
-                                    'None at None',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: const Row(
-                                children: [
-                                  Icon(Icons.keyboard_arrow_down,
-                                      color: Colors.white, size: 30),
-                                  SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      'The Bitter Rangers',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              ],
                             ),
                           ),
                         ),
@@ -183,6 +115,49 @@ class ViewTeamInfo extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TeamDropdown extends StatefulWidget {
+  const TeamDropdown({super.key});
+
+  @override
+  TeamDropdownState createState() => TeamDropdownState();
+}
+
+class TeamDropdownState extends State<TeamDropdown> {
+  String selectedTeam = 'The Bitter Rangers';
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<String>(
+      value: selectedTeam,
+      dropdownColor: AppColor.tertiaryColor,
+      decoration: const InputDecoration(
+         prefixIcon: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 40),
+         ),
+      // icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 30),
+      iconSize: 0,
+      elevation: 16,
+      isExpanded: true,
+      // underline: Container(),
+      style: const TextStyle(color: Colors.white),
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedTeam = newValue!;
+        });
+      },
+      items: <String>['The Bitter Rangers', "CPI's Hurricane", 'None at None']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(
+            value,
+            style: const TextStyle(color: Colors.white),
+          ),
+        );
+      }).toList(),
     );
   }
 }
