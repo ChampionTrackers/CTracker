@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ctracker/constants/config.dart';
 import 'package:ctracker/model/match_model.dart';
 import 'package:ctracker/model/team_model.dart';
+import 'package:ctracker/model/team_position_model.dart';
 import 'package:ctracker/model/tournament_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -56,11 +57,29 @@ class TournamentController {
 
     if (response.statusCode == 200) {
       List<dynamic> matchesJson = json.decode(response.body);
-      List<Match> matches =
-          matchesJson.map((json) => Match.fromJson(json)).toList();
+      List<Match> matches = matchesJson
+          .map((json) => Match.fromJson(json))
+          .where((match) => match.status != 'COMPLETED')
+          .toList();
       return matches;
     } else {
       throw Exception('Failed to load matches');
+    }
+  }
+
+  Future<List<TeamPosition>> fetchPositions(int tournamentId) async {
+    final response = await http.get(
+      Uri.parse(
+          '${Config.apiBaseUrl}/v1/championships/$tournamentId/teams/positions'),
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> positionsJson = json.decode(response.body);
+      List<TeamPosition> positions =
+          positionsJson.map((json) => TeamPosition.fromJson(json)).toList();
+      return positions;
+    } else {
+      throw Exception('Failed to load positions');
     }
   }
 }
