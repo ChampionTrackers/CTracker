@@ -1,6 +1,7 @@
 import 'package:ctracker/constants/colors.dart';
 import 'package:ctracker/controller/controller_home.dart';
 import 'package:ctracker/model/tournament_model.dart';
+import 'package:ctracker/view/view_more_tournaments.dart';
 import 'package:ctracker/view/view_tournament_description.dart';
 import 'package:ctracker/widget/bottom_navigation.dart';
 import 'package:ctracker/widget/tracker_appbar.dart';
@@ -57,7 +58,12 @@ class _ViewHomeState extends State<ViewHome> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ViewMoreTournaments()));
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                         minimumSize: Size.zero,
