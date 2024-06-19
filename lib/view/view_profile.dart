@@ -133,7 +133,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                   const Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
                                     child: Text(
-                                      "SCORE TOTAL",
+                                      "CTCOINS",
                                       style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
@@ -145,7 +145,8 @@ class _ViewProfileState extends State<ViewProfile> {
                                     padding: const EdgeInsets.fromLTRB(
                                         0, 0, 10, 20), // Espaço entre os textos
                                     child: Text(
-                                      snapshot.data?.score.toString() ?? "Erro",
+                                      snapshot.data?.balance.toString() ??
+                                          "Erro",
                                       style: const TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
@@ -158,15 +159,15 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: const Row(
+                              child: Row(
                                 //Linha2
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Melhor Desempenho:",
+                                      "Maior Palpite:",
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: AppColor.textColor,
@@ -175,10 +176,12 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   // Espaço entre os textos
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Placeholder",
-                                      style: TextStyle(
+                                      snapshot.data?.highestGuess.toString() ??
+                                          "Erro",
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         color: AppColor.secondaryColor,
                                       ),
@@ -189,15 +192,15 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: const Row(
+                              child: Row(
                                 //Linha3
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Melhor Palpite:",
+                                      "CTCoins Ganhos:",
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: AppColor.textColor,
@@ -206,10 +209,12 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   // Espaço entre os textos
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Placeholder",
-                                      style: TextStyle(
+                                      snapshot.data?.totalEarnings.toString() ??
+                                          "Erro",
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         color: AppColor.secondaryColor,
                                       ),
@@ -220,15 +225,15 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: const Row(
+                              child: Row(
                                 //Linha4
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Torneios Participados:",
+                                      "CTCoins Perdidos:",
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: AppColor.textColor,
@@ -237,10 +242,12 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   // Espaço entre os textos
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Placeholder",
-                                      style: TextStyle(
+                                      snapshot.data?.totalLosses.toString() ??
+                                          "Erro",
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         color: AppColor.secondaryColor,
                                       ),
@@ -251,15 +258,15 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: const Row(
+                              child: Row(
                                 //Linha5
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Palpites Corretos:",
+                                      "Última Equipe Palpitada:",
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: AppColor.textColor,
@@ -268,10 +275,45 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   // Espaço entre os textos
                                   Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    child: Text(
+                                      snapshot.data?.lastTeamGuessedAt ??
+                                          "Erro",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: AppColor.secondaryColor,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: Row(
+                                //Linha5
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                     child: Text(
-                                      "Placeholder",
+                                      "Qtd de Palpites:",
                                       style: TextStyle(
+                                        fontSize: 14,
+                                        color: AppColor.textColor,
+                                      ),
+                                    ),
+                                  ),
+                                  // Espaço entre os textos
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    child: Text(
+                                      snapshot.data?.totalGuesses.toString() ??
+                                          "Erro",
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         color: AppColor.secondaryColor,
                                       ),

@@ -1,27 +1,61 @@
+import 'dart:convert';
+
 class User {
   String? email;
   String? name;
   String? nickname;
   String? picture;
   int? score;
+  int? balance;
+  int? highestGuess;
+  int? totalEarnings;
+  int? totalLosses;
+  String? lastTeamGuessedAt;
+  int? totalGuesses;
 
-  User({this.email, this.name, this.nickname, this.picture, this.score});
+  User({
+    this.email,
+    this.name,
+    this.nickname,
+    this.picture,
+    this.score,
+    this.balance,
+    this.highestGuess,
+    this.totalEarnings,
+    this.totalLosses,
+    this.lastTeamGuessedAt,
+    this.totalGuesses,
+  });
 
-  User.fromJson(Map<String, dynamic> json) {
-    email = json['email'];
-    name = json['name'];
-    nickname = json['nickname'];
-    picture = json['picture'];
-    score = json['score'];
-  }
+  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (email != "") data['email'] = email;
-    if (name != "") data['name'] = name;
-    if (nickname != "") data['nickname'] = nickname;
-    if (picture != null) data['picture'] = picture;
-    if (score != null) data['score'] = score;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        email: json["email"],
+        name: json["name"],
+        nickname: json["nickname"],
+        picture: json["picture"],
+        score: json["score"],
+        balance: json["balance"],
+        highestGuess: json["highestGuess"],
+        totalEarnings: json["totalEarnings"],
+        totalLosses: json["totalLosses"],
+        lastTeamGuessedAt: json["lastTeamGuessedAt"],
+        totalGuesses: json["totalGuesses"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "email": email,
+        "name": name,
+        "nickname": nickname,
+        "picture": picture,
+        "score": score,
+        "balance": balance,
+        "highestGuess": highestGuess,
+        "totalEarnings": totalEarnings,
+        "totalLosses": totalLosses,
+        "lastTeamGuessedAt": lastTeamGuessedAt,
+        "totalGuesses": totalGuesses,
+      };
 }
