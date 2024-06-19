@@ -43,5 +43,5 @@ jobs:
           name: Release ${{ env.RELEASE_VERSION }}
           artifacts: "build/app/outputs/apk/release/*.apk"
           token: ${{ secrets.TOKEN }}
-          generateReleaseNotes: true
+          # generateReleaseNotes: true
           prerelease: true
